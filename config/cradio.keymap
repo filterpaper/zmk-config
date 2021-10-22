@@ -91,9 +91,9 @@
 		};
 		number_layer {
 			bindings = <
-			&trans   &kp N1    &kp N2    &kp N3    &kp C_VOL_UP    &kp HOME &kp PG_DN &kp PG_UP &kp END  &kp DQT
-			&trans   &kp N4    &kp N5    &kp N6    &kp C_VOL_DN    &kp LEFT &kp DOWN &kp UP   &kp RGHT &kp SQT
-			&kp CAPS &kp N7    &kp N8    &kp N9    &kp N0          &trans   &trans   &trans   &trans   &trans
+			&trans   &kp N1    &kp N2    &kp N3    &kp C_VOL_UP    &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DQT
+			&trans   &kp N4    &kp N5    &kp N6    &kp C_VOL_DN    &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp SQT
+			&kp CAPS &kp N7    &kp N8    &kp N9    &kp N0          &trans   &trans    &trans    &trans    &trans
 			                           &mo FNC &kp ESC         &trans &trans
 			>;
 		};
