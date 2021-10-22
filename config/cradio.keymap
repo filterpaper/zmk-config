@@ -86,7 +86,7 @@
 			&kp Q    &kp W    &kp F    &kp P    &kp G        &kp J    &kp L    &kp U     &kp Y   &kp SEMI
 			&kp A    &kp R    &kp S    &kp T    &kp D        &kp H    &kp N    &kp E     &kp I   &kp O
 			&kp Z    &kp X    &kp C    &kp V    &kp B        &kp K    &kp M    &kp COMMA &kp DOT &kp FSLH
-			                    &lt SYM TAB &mt SHFT ENTER     &mt RSHFT SPACE &lt NUM BSPC
+			                           &lt SYM TAB &mt RSHFT ENTER   &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		number_layer {
