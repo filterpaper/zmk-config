@@ -44,17 +44,34 @@
 			flavor = "tap-preferred";
 			bindings = <&kp>, <&kp>;
 		};
+		th: tap_hold {
+			compatible = "zmk,behavior-hold-tap";
+			label = "home row mods";
+			#binding-cells = <2>;
+			tapping-term-ms = <230>;
+			quick_tap_ms = <0>;
+			flavor = "tap-preferred";
+			bindings = <&kp>, <&kp>;
+		};
+		lt2: layer_tap2 {
+			compatible = "zmk,behavior-hold-tap";
+			label = "layer tap2";
+			#binding-cells = <2>;
+			tapping-term-ms = <200>;
+			quick_tap_ms = <0>;
+			flavor = "hold-preferred";
+			bindings = <&mo>, <&kp>;
+		};
 	};
 
 	keymap {
 		compatible = "zmk,keymap";
-
 		default_layer {
 			bindings = <
-			&kp Q       &kp W      &kp E       &kp R      &kp T   &kp Y &kp U      &kp I       &kp O      &kp P
-			&hm LSHFT A &hm LALT S &hm LCTRL D &hm LGUI F &kp G   &kp H &hm LGUI J &hm LCTRL K &hm LALT L &hm LSHFT SEMI
-			&kp Z       &kp X      &kp C       &kp V      &kp B   &kp N &kp M      &kp COMMA   &kp DOT    &kp FSLH
-			                           &lt SYM TAB &mt RSHFT ENTER   &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q       &kp W      &kp E       &kp R              &kp T   &kp Y &kp U       &kp I           &kp O         &kp P
+			&hm LSHFT A &hm LALT S &hm LCTRL D &hm LGUI F         &kp G   &kp H &hm LGUI J  &hm LCTRL K     &hm LALT L    &hm LSHFT SEMI
+			&kp Z       &kp X      &kp C       &hm LS(LG(V)) V    &kp B   &kp N &hm LG(V) M &hm LG(C) COMMA &hm LG(X) DOT &hm LG(Z) FSLH
+			                                &lt SYM TAB &mt RSHFT ENTER   &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		colemak_layer {
