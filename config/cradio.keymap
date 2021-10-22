@@ -15,6 +15,27 @@
 #define SYM 3
 #define FNC 4
 
+// OS X shortcuts
+#define Z_SLEEP	LA(LG(C_PWR)
+#define Z_SHUT	LC(LA(LG(C_PWR)))
+
+// SACG Home row mods
+#define HM_A	LSHFT A
+#define HM_S	LALT S
+#define HM_D	LCTRL D
+#define HM_F	LGUI F
+#define HM_J	LGUI J
+#define HM_K	LCTRL K
+#define HM_L	LALT L
+#define HM_SEMI	LSHFT SEMI
+
+// Tap hold shortcuts
+#define TH_V	LS(LG(V)) V
+#define TH_M	LG(V) M
+#define TH_COMMA LG(C) COMMA
+#define TH_DOT	LG(X) DOT
+#define TH_FSLH	LG(Z) FSLH
+
 &mt { tapping-term-ms = <230>; };
 &lt { quick_tap_ms = <200>; };
 
@@ -48,19 +69,10 @@
 			compatible = "zmk,behavior-hold-tap";
 			label = "home row mods";
 			#binding-cells = <2>;
-			tapping-term-ms = <230>;
+			tapping-term-ms = <200>;
 			quick_tap_ms = <0>;
 			flavor = "tap-preferred";
 			bindings = <&kp>, <&kp>;
-		};
-		lt2: layer_tap2 {
-			compatible = "zmk,behavior-hold-tap";
-			label = "layer tap2";
-			#binding-cells = <2>;
-			tapping-term-ms = <200>;
-			quick_tap_ms = <0>;
-			flavor = "hold-preferred";
-			bindings = <&mo>, <&kp>;
 		};
 	};
 
@@ -68,10 +80,10 @@
 		compatible = "zmk,keymap";
 		default_layer {
 			bindings = <
-			&kp Q       &kp W      &kp E       &kp R              &kp T   &kp Y &kp U       &kp I           &kp O         &kp P
-			&hm LSHFT A &hm LALT S &hm LCTRL D &hm LGUI F         &kp G   &kp H &hm LGUI J  &hm LCTRL K     &hm LALT L    &hm LSHFT SEMI
-			&kp Z       &kp X      &kp C       &hm LS(LG(V)) V    &kp B   &kp N &hm LG(V) M &hm LG(C) COMMA &hm LG(X) DOT &hm LG(Z) FSLH
-			                                &lt SYM TAB &mt RSHFT ENTER   &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q    &kp W    &kp E    &kp R    &kp T   &kp Y &kp U    &kp I        &kp O      &kp P
+			&hm HM_A &hm HM_S &hm HM_D &hm HM_F &kp G   &kp H &hm HM_J &hm HM_K     &hm HM_L   &hm HM_SEMI
+			&kp Z    &kp X    &kp C    &th TH_V &kp B   &kp N &th TH_M &th TH_COMMA &th TH_DOT &th TH_FSLH
+			           &lt SYM TAB &mt RS(RALT) ENTER   &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		colemak_layer {
@@ -79,7 +91,7 @@
 			&kp Q &kp W &kp F &kp P &kp G   &kp J &kp L &kp U     &kp Y   &kp SEMI
 			&kp A &kp R &kp S &kp T &kp D   &kp H &kp N &kp E     &kp I   &kp O
 			&kp Z &kp X &kp C &kp V &kp B   &kp K &kp M &kp COMMA &kp DOT &kp FSLH
-			  &lt SYM TAB &mt RSHFT ENTER   &mt RSHFT SPACE &lt NUM BSPC
+			&lt SYM TAB &mt RS(RALT) ENTER  &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		number_layer {
@@ -100,10 +112,10 @@
 		};
 		function_layer {
 			bindings = <
-			&trans  &kp F1 &kp F2 &kp F3 &kp F10   &bt BT_SEL 0 &trans &trans &trans &tog CMK
-			&trans  &kp F4 &kp F5 &kp F6 &kp F11   &bt BT_SEL 1 &trans &trans &trans &kp INS
-			&trans  &kp F7 &kp F8 &kp F9 &kp F12   &trans       &trans &trans &trans &kp DEL
-			                  &trans &bootloader   &bt BT_CLR   &trans
+			&trans      &kp F1 &kp F2 &kp F3 &kp F10   &bt BT_SEL 0 &trans &trans &trans &tog CMK
+			&trans      &kp F4 &kp F5 &kp F6 &kp F11   &bt BT_SEL 1 &trans &trans &trans &kp INS
+			&kp Z_SLEEP &kp F7 &kp F8 &kp F9 &kp F12   &bt BT_CLR   &trans &trans &trans &kp DEL
+			                      &trans &bootloader   &kp Z_SHUT &trans
 			>;
 		};
 	};
