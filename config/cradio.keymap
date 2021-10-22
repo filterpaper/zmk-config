@@ -16,7 +16,7 @@
 #define FNC 4
 
 // OS X shortcuts
-#define Z_SLEEP	LA(LG(C_PWR)
+#define Z_SLEEP	LA(LG(C_PWR))
 #define Z_SHUT	LC(LA(LG(C_PWR)))
 
 // SACG Home row mods
