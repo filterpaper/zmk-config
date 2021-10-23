@@ -17,19 +17,11 @@
 #define Z_SLEEP	 LA(LG(C_PWR))
 #define Z_SHUT	 LA(LG(LC(C_PWR)))
 
-// SACG Home row mods
-#define HM_A	&hm LSHFT A
-#define HM_S	&hm LALT S
-#define HM_D	&hm LCTRL D
-#define HM_F	&hm LGUI F
-#define HM_J	&hm RGUI J
-#define HM_K	&hm RCTRL K
-#define HM_L	&hm RALT L
-#define HM_SEMI	&hm RSHFT SEMI
-#define HS(k)	&hm LSHFT k
-#define HA(k)	&hm LALT k
-#define HC(k)	&hm LCTRL k
-#define HG(k)	&hm LGUI k
+// Home row mod macros
+#define HMS(k)	&hm LSHFT k
+#define HMA(k)	&hm LALT k
+#define HMC(k)	&hm LCTRL k
+#define HMG(k)	&hm LGUI k
 
 // Layers
 #define BSE 0
@@ -86,18 +78,18 @@
 		compatible = "zmk,keymap";
 		default_layer {
 			bindings = <
-			&kp Q &kp W &kp E &kp R &kp T     &kp Y &kp U &kp I    &kp O  &kp P
-			HS(A) HA(S) HC(D) HG(F) &kp G     &kp H HM_J  HM_K     HM_L   HM_SEMI
-			&kp Z &kp X &kp C TH_V  &kp B     &kp N TH_M  TH_COMMA TH_DOT TH_FSLH
-			&lt SYM TAB &mt RS(RALT) ENTER    &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q  &kp W  &kp E  &kp R  &kp T     &kp Y &kp U  &kp I    &kp O  &kp P
+			HMS(A) HMA(S) HMC(D) HMG(F) &kp G     &kp H HMG(J) HMC(K)   HMA(L) HMS(SEMI)
+			&kp Z  &kp X  &kp C  TH_V   &kp B     &kp N TH_M   TH_COMMA TH_DOT TH_FSLH
+			   &lt SYM TAB &mt RS(RALT) ENTER     &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		colemak_layer {
 			bindings = <
-			&kp Q &kp W &kp F &kp P &kp G     &kp J &kp L &kp U     &kp Y   &kp SEMI
-			&kp A &kp R &kp S &kp T &kp D     &kp H &kp N &kp E     &kp I   &kp O
-			&kp Z &kp X &kp C &kp V &kp B     &kp K &kp M &kp COMMA &kp DOT &kp FSLH
-			&lt SYM TAB &mt RS(RALT) ENTER    &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q  &kp W  &kp F  &kp P  &kp G     &kp J &kp L  &kp U    &kp Y  &kp SEMI
+			HMS(A) HMA(R) HMC(S) HMG(T) &kp D     &kp H HMG(N) HMC(E)   HMA(I) HMS(O)
+			&kp Z  &kp X  &kp C  TH_V   &kp B     &kp K TH_M   TH_COMMA TH_DOT TH_FSLH
+			   &lt SYM TAB &mt RS(RALT) ENTER     &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		number_layer {
