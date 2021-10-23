@@ -8,13 +8,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// Layers
-#define BSE 0
-#define CMK 1
-#define NUM 2
-#define SYM 3
-#define FNC 4
-
 // Tap hold and OS X shortcuts
 #define TH_V	 LS(LG(V)) V
 #define TH_M	 LG(V) M
@@ -22,19 +15,31 @@
 #define TH_DOT	 LG(X) DOT
 #define TH_FSLH	 LG(Z) FSLH
 #define Z_SLEEP	 LA(LG(C_PWR))
-#define Z_SHUT	 LC(LA(LG(C_PWR)))
+#define Z_SHUT	 LA(LG(LC(C_PWR)))
 
 // SACG Home row mods
 #define HM_A	LSHFT A
 #define HM_S	LALT S
 #define HM_D	LCTRL D
 #define HM_F	LGUI F
-#define HM_J	LGUI J
-#define HM_K	LCTRL K
-#define HM_L	LALT L
-#define HM_SEMI	LSHFT SEMI
+#define HM_J	RGUI J
+#define HM_K	RCTRL K
+#define HM_L	RALT L
+#define HM_SEMI	RSHFT SEMI
+#define SACG(k0 k1 k2 k3 k4 k5 k6 k7) \
+	&hm LSHFT k1 &hm LALT k3 &hm LCTRL k5 &hm LGUI k7
+#define GCAS(k0 k1 k2 k3 k4 k5 k6 k7) \
+	&hm LGUI k1 &hm LCTRL k3 &hm LALT k5 &hm LSHFT k7
+
+// Layers
+#define BSE 0
+#define CMK 1
+#define NUM 2
+#define SYM 3
+#define FNC 4
 
 #define ______	&trans
+
 
 &mt { tapping-term-ms = <230>; };
 &lt { quick_tap_ms = <200>; };
@@ -42,16 +47,17 @@
 / {
 	combos {
 		compatible = "zmkcombos";
-		combo_esc {
+		combo_volup {
 			timeout-ms = <20>;
 			layers = <0>;
-			key-positions = <0 1>;
-			bindings = <&kp ESC>;
+			key-positions = <5 15>;
+			bindings = <&kp C_VOL_UP>;
 		};
-		combo_tab {
-			timeout-ms = <50>;
-			key-positions = <10 11>;
-			bindings = <&kp TAB>;
+		combo_voldn {
+			timeout-ms = <20>;
+			layers = <0>;
+			key-positions = <15 25>;
+			bindings = <&kp C_VOL_DN>;
 		};
 	};
 
@@ -67,7 +73,7 @@
 		};
 		th: tap_hold {
 			compatible = "zmk,behavior-hold-tap";
-			label = "home row mods";
+			label = "tap hold macros";
 			#binding-cells = <2>;
 			tapping-term-ms = <200>;
 			quick_tap_ms = <0>;
@@ -98,24 +104,24 @@
 			bindings = <
 			______   &kp N1 &kp N2 &kp N3 &kp C_VOL_UP     &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DQT
 			______   &kp N4 &kp N5 &kp N6 &kp C_VOL_DN     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp SQT
-			&kp CAPS &kp N7 &kp N8 &kp N9 &kp N0           &trans   &trans    &trans    &trans    &trans
-			                      &mo FNC &kp ESC          &trans   &trans
+			&kp CAPS &kp N7 &kp N8 &kp N9 &kp N0           ______   ______    ______    ______    ______
+			                      &mo FNC &kp ESC          ______   ______
 			>;
 		};
 		symbol_layer {
 			bindings = <
-			&trans  &trans   &kp LBKT &kp LBRC &kp RBRC &trans        &kp CARET &kp LPAR  &kp RPAR  &kp RBKT &kp TILDE
-			&trans  &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp AMPS  &kp MINUS &kp EQUAL &kp BSLH &kp GRAVE
-			&trans  &trans   &trans   &trans   &trans   &trans        &kp ASTRK &kp UNDER &kp PLUS  &kp PIPE &trans
-				                               &trans   &trans        &kp SPACE &mo FNC
+			______  ______   &kp LBKT &kp LBRC &kp RBRC ______        &kp CARET &kp LPAR  &kp RPAR  &kp RBKT &kp TILDE
+			______  &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp AMPS  &kp MINUS &kp EQUAL &kp BSLH &kp GRAVE
+			______  ______   ______   ______   ______   ______        &kp ASTRK &kp UNDER &kp PLUS  &kp PIPE ______
+				                               ______   ______        &kp SPACE &mo FNC
 			>;
 		};
 		function_layer {
 			bindings = <
-			&trans      &kp F1 &kp F2 &kp F3 &kp F10     &bt BT_SEL 0 &trans &trans &trans &tog CMK
-			&trans      &kp F4 &kp F5 &kp F6 &kp F11     &bt BT_SEL 1 &trans &trans &trans &kp INS
-			&kp Z_SLEEP &kp F7 &kp F8 &kp F9 &kp F12     &bt BT_CLR   &trans &trans &trans &kp DEL
-			                      &trans &bootloader     &kp Z_SHUT &trans
+			______      &kp F1 &kp F2 &kp F3 &kp F10     &bt BT_SEL 0 ______ ______ ______ &tog CMK
+			______      &kp F4 &kp F5 &kp F6 &kp F11     &bt BT_SEL 1 ______ ______ ______ &kp INS
+			&kp Z_SLEEP &kp F7 &kp F8 &kp F9 &kp F12     &bt BT_CLR   ______ ______ ______ &kp DEL
+			                      ______ &bootloader     &kp Z_SHUT ______
 			>;
 		};
 	};
