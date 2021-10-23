@@ -15,9 +15,14 @@
 #define SYM 3
 #define FNC 4
 
-// OS X shortcuts
-#define Z_SLEEP	LA(LG(C_PWR))
-#define Z_SHUT	LC(LA(LG(C_PWR)))
+// Tap hold and OS X shortcuts
+#define TH_V	 LS(LG(V)) V
+#define TH_M	 LG(V) M
+#define TH_COMMA LG(C) COMMA
+#define TH_DOT	 LG(X) DOT
+#define TH_FSLH	 LG(Z) FSLH
+#define Z_SLEEP	 LA(LG(C_PWR))
+#define Z_SHUT	 LC(LA(LG(C_PWR)))
 
 // SACG Home row mods
 #define HM_A	LSHFT A
@@ -29,12 +34,7 @@
 #define HM_L	LALT L
 #define HM_SEMI	LSHFT SEMI
 
-// Tap hold shortcuts
-#define TH_V	LS(LG(V)) V
-#define TH_M	LG(V) M
-#define TH_COMMA LG(C) COMMA
-#define TH_DOT	LG(X) DOT
-#define TH_FSLH	LG(Z) FSLH
+#define ______	&trans
 
 &mt { tapping-term-ms = <230>; };
 &lt { quick_tap_ms = <200>; };
@@ -80,42 +80,42 @@
 		compatible = "zmk,keymap";
 		default_layer {
 			bindings = <
-			&kp Q    &kp W    &kp E    &kp R    &kp T   &kp Y &kp U    &kp I        &kp O      &kp P
-			&hm HM_A &hm HM_S &hm HM_D &hm HM_F &kp G   &kp H &hm HM_J &hm HM_K     &hm HM_L   &hm HM_SEMI
-			&kp Z    &kp X    &kp C    &th TH_V &kp B   &kp N &th TH_M &th TH_COMMA &th TH_DOT &th TH_FSLH
-			           &lt SYM TAB &mt RS(RALT) ENTER   &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q    &kp W    &kp E    &kp R    &kp T     &kp Y &kp U    &kp I        &kp O      &kp P
+			&hm HM_A &hm HM_S &hm HM_D &hm HM_F &kp G     &kp H &hm HM_J &hm HM_K     &hm HM_L   &hm HM_SEMI
+			&kp Z    &kp X    &kp C    &th TH_V &kp B     &kp N &th TH_M &th TH_COMMA &th TH_DOT &th TH_FSLH
+			           &lt SYM TAB &mt RS(RALT) ENTER     &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		colemak_layer {
 			bindings = <
-			&kp Q &kp W &kp F &kp P &kp G   &kp J &kp L &kp U     &kp Y   &kp SEMI
-			&kp A &kp R &kp S &kp T &kp D   &kp H &kp N &kp E     &kp I   &kp O
-			&kp Z &kp X &kp C &kp V &kp B   &kp K &kp M &kp COMMA &kp DOT &kp FSLH
-			&lt SYM TAB &mt RS(RALT) ENTER  &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q &kp W &kp F &kp P &kp G     &kp J &kp L &kp U     &kp Y   &kp SEMI
+			&kp A &kp R &kp S &kp T &kp D     &kp H &kp N &kp E     &kp I   &kp O
+			&kp Z &kp X &kp C &kp V &kp B     &kp K &kp M &kp COMMA &kp DOT &kp FSLH
+			&lt SYM TAB &mt RS(RALT) ENTER    &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		number_layer {
 			bindings = <
-			&trans   &kp N1 &kp N2 &kp N3 &kp C_VOL_UP   &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DQT
-			&trans   &kp N4 &kp N5 &kp N6 &kp C_VOL_DN   &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp SQT
-			&kp CAPS &kp N7 &kp N8 &kp N9 &kp N0         &trans   &trans    &trans    &trans    &trans
-			                      &mo FNC &kp ESC        &trans   &trans
+			______   &kp N1 &kp N2 &kp N3 &kp C_VOL_UP     &kp HOME &kp PG_DN &kp PG_UP &kp END   &kp DQT
+			______   &kp N4 &kp N5 &kp N6 &kp C_VOL_DN     &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &kp SQT
+			&kp CAPS &kp N7 &kp N8 &kp N9 &kp N0           &trans   &trans    &trans    &trans    &trans
+			                      &mo FNC &kp ESC          &trans   &trans
 			>;
 		};
 		symbol_layer {
 			bindings = <
-			&trans  &trans   &kp LBKT &kp LBRC &kp RBRC &trans      &kp CARET &kp LPAR  &kp RPAR  &kp RBKT &kp TILDE
-			&trans  &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT   &kp AMPS  &kp MINUS &kp EQUAL &kp BSLH &kp GRAVE
-			&trans  &trans   &trans   &trans   &trans   &trans      &kp ASTRK &kp UNDER &kp PLUS  &kp PIPE &trans
-				                               &trans   &trans      &kp SPACE &mo FNC
+			&trans  &trans   &kp LBKT &kp LBRC &kp RBRC &trans        &kp CARET &kp LPAR  &kp RPAR  &kp RBKT &kp TILDE
+			&trans  &kp EXCL &kp AT   &kp HASH &kp DLLR &kp PRCNT     &kp AMPS  &kp MINUS &kp EQUAL &kp BSLH &kp GRAVE
+			&trans  &trans   &trans   &trans   &trans   &trans        &kp ASTRK &kp UNDER &kp PLUS  &kp PIPE &trans
+				                               &trans   &trans        &kp SPACE &mo FNC
 			>;
 		};
 		function_layer {
 			bindings = <
-			&trans      &kp F1 &kp F2 &kp F3 &kp F10   &bt BT_SEL 0 &trans &trans &trans &tog CMK
-			&trans      &kp F4 &kp F5 &kp F6 &kp F11   &bt BT_SEL 1 &trans &trans &trans &kp INS
-			&kp Z_SLEEP &kp F7 &kp F8 &kp F9 &kp F12   &bt BT_CLR   &trans &trans &trans &kp DEL
-			                      &trans &bootloader   &kp Z_SHUT &trans
+			&trans      &kp F1 &kp F2 &kp F3 &kp F10     &bt BT_SEL 0 &trans &trans &trans &tog CMK
+			&trans      &kp F4 &kp F5 &kp F6 &kp F11     &bt BT_SEL 1 &trans &trans &trans &kp INS
+			&kp Z_SLEEP &kp F7 &kp F8 &kp F9 &kp F12     &bt BT_CLR   &trans &trans &trans &kp DEL
+			                      &trans &bootloader     &kp Z_SHUT &trans
 			>;
 		};
 	};
