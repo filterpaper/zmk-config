@@ -9,11 +9,11 @@
 #include <dt-bindings/zmk/bt.h>
 
 // Tap hold and OS X shortcuts
-#define TH_V	 LS(LG(V)) V
-#define TH_M	 LG(V) M
-#define TH_COMMA LG(C) COMMA
-#define TH_DOT	 LG(X) DOT
-#define TH_FSLH	 LG(Z) FSLH
+#define TH_V	 &th LS(LG(V)) V
+#define TH_M	 &th LG(V) M
+#define TH_COMMA &th LG(C) COMMA
+#define TH_DOT	 &th LG(X) DOT
+#define TH_FSLH	 &th LG(Z) FSLH
 #define Z_SLEEP	 LA(LG(C_PWR))
 #define Z_SHUT	 LA(LG(LC(C_PWR)))
 
@@ -26,8 +26,6 @@
 #define HM_K	RCTRL K
 #define HM_L	RALT L
 #define HM_SEMI	RSHFT SEMI
-#define SACG(k0 k1 k2 k3 k4 k5 k6 k7) &hm LSHFT k1 &hm LALT k3 &hm LCTRL k5 &hm LGUI k7
-#define GCAS(k0 k1 k2 k3 k4 k5 k6 k7) &hm LGUI k1 &hm LCTRL k3 &hm LALT k5 &hm LSHFT k7
 
 // Layers
 #define BSE 0
@@ -84,10 +82,10 @@
 		compatible = "zmk,keymap";
 		default_layer {
 			bindings = <
-			     &kp Q &kp W &kp E &kp R    &kp T     &kp Y      &kp U    &kp I        &kp O      &kp P
-			SACG(&kp A &kp S &kp D &kp F)   &kp G     &kp H GCAS(&kp J    &kp K        &kp L      &kp SEMI)
-			     &kp Z &kp X &kp C &th TH_V &kp B     &kp N      &th TH_M &th TH_COMMA &th TH_DOT &th TH_FSLH
-			       &lt SYM TAB &mt RS(RALT) ENTER     &mt RSHFT SPACE &lt NUM BSPC
+			&kp Q    &kp W    &kp E    &kp R    &kp T     &kp Y &kp U    &kp I        &kp O      &kp P
+			&hm HM_A &hm HM_S &hm HM_D &hm HM_F &kp G     &kp H &hm HM_J &hm HM_K     &hm HM_L   &hm HM_SEMI
+			&kp Z    &kp X    &kp C    TH_V     &kp B     &kp N TH_M     TH_COMMA      TH_DOT    TH_FSLH
+			           &lt SYM TAB &mt RS(RALT) ENTER     &mt RSHFT SPACE &lt NUM BSPC
 			>;
 		};
 		colemak_layer {
