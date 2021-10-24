@@ -20,5 +20,5 @@ compatible = "zmkcombos";
 		bindings = <BINDINGS>; \
 	};
 
-COMB(VOLU,	&kp C_VOL_UP, 5 15)
-COMB(VOLD,	&kp C_VOL_DN, 15 25)
+COMBO(VOLU,	&kp C_VOL_UP, 5 15)
+COMBO(VOLD,	&kp C_VOL_DN, 15 25)

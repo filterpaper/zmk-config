@@ -26,4 +26,4 @@
 #define SYM 3
 #define FNC 4
 
-#define ______	&trans
+#define ________	&trans
