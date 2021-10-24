@@ -10,8 +10,8 @@
 #define TH_COMMA &th LG(C) COMMA
 #define TH_DOT	 &th LG(X) DOT
 #define TH_FSLH	 &th LG(Z) FSLH
-#define Z_SLEEP	 LA(LG(C_PWR))
-#define Z_SHUT	 LA(LG(LC(C_PWR)))
+#define Z_SLEEP	 &kp LA(LG(C_PWR))
+#define Z_SHUT	 &kp LA(LG(LC(C_PWR)))
 
 // Home row mod macros
 #define HMS(k)	&hm LSHFT k
@@ -26,4 +26,4 @@
 #define SYM 3
 #define FNC 4
 
-#define ________	&trans
+#define ________ &trans
