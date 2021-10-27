@@ -12,11 +12,11 @@
 
 compatible = "zmkcombos";
 #define COMBO(name, keypress, keypos) \
-	combo_##name { \
-		layers = <0>; \
-		timeout-ms = <20>; \
-		bindings = <keypress>; \
-		key-positions = <keypos>; \
+	combo_##name {                    \
+		layers = <0>;                 \
+		timeout-ms = <20>;            \
+		bindings = <keypress>;        \
+		key-positions = <keypos>;     \
 	};
 
 COMBO(VOLU,	&kp C_VOL_UP, 5 15)
