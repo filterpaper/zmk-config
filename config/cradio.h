@@ -26,4 +26,11 @@
 #define SYM 3
 #define FNC 4
 
+// BT shorcuts
+#define Z_BT_CLR &bt BT_CLR
+#define Z_BT_0   &bt BT_SEL 0
+#define Z_BT_1   &bt BT_SEL 1
+#define Z_BLE    &out OUT_BLE
+#define Z_USB    &out OUT_USB
+
 #define ________ &trans
