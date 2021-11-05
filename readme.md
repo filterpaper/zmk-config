@@ -6,12 +6,12 @@ Personal ZMK configuration for 34-key Cradio ([Hypergolic](https://github.com/da
 The C preprocessor in `combos.dtsi` simplifies combos into one-liners in the format of:
 ```c
 #define COMBO(name, keypress, keypos) \
-	combo_##name {                    \
-		layers = <0>;                 \
-		timeout-ms = <20>;            \
-		bindings = <keypress>;        \
-		key-positions = <keypos>;     \
-	};
+    combo_##name {                    \
+        layers = <0>;                 \
+        timeout-ms = <20>;            \
+        bindings = <keypress>;        \
+        key-positions = <keypos>;     \
+    };
 
 COMBO(name, bindings, key positions)
 ```
