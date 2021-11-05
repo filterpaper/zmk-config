@@ -10,7 +10,7 @@
    20 21 22 23 24  25 26 27 28 29
             30 31  32 33          */
 
-compatible = "zmkcombos";
+compatible = "zmk,combos";
 #define COMBO(name, keypress, keypos) \
 	combo_##name {                    \
 		layers = <0>;                 \
