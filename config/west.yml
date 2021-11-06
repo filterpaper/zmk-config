@@ -2,9 +2,15 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: filterpaper
+      url-base: https://github.com/filterpaper
   projects:
+#    - name: zmk
+#      remote: zmkfirmware
+#      revision: main
+#      import: app/west.yml
     - name: zmk
-      remote: zmkfirmware
+      remote: filterpaper
       revision: main
       import: app/west.yml
   self:
