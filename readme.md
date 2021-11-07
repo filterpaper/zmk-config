@@ -18,10 +18,8 @@ COMBO(name, bindings, key positions)
 ## Home Row Mods
 Another set of C preprocessors to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions while keeping keymap bindings tidy:
 ```c
-#define HMS(k)	&hm LSHFT k
-#define HMA(k)	&hm LALT k
-#define HMC(k)	&hm LCTRL k
-#define HMG(k)	&hm LGUI k
+#define HRML(k1,k2,k3,k4) &hm LSHFT k1 &hm LALT k2 &hm LCTRL k3 &hm LGUI k4
+#define HRMR(k1,k2,k3,k4) &hm LGUI k1 &hm LCTRL k2 &hm LALT k3 &hm LSHFT k4
 ```
 
 # Useful Links
@@ -32,7 +30,7 @@ Another set of C preprocessors to easily swap [home row mods](https://preconditi
 ## Hardware Parts
 * Mill-Max [socket pins](https://www.digikey.com/product-detail/en/3320-0-00-15-00-00-03-0/ED1134-ND/4147392)
 * Machined [header sockets](https://www.aliexpress.com/item/32852480645.html)
-* [301230 Li-po batteries](https://www.aliexpress.com/item/4000336497558.html)
-* [MSK-12C02 SMD Switch](https://www.aliexpress.com/item/1005001398386692.html)
-* [Silicone feet](https://www.aliexpress.com/item/32912066603.html)
+* [301230](https://www.aliexpress.com/item/4000336497558.html) Li-po batteries
+* [MSK-12C02](https://www.aliexpress.com/item/1005001398386692.html) SMD Switch
+* [Silicone bumper](https://www.aliexpress.com/item/32912066603.html) feet
 * Kailh [gchoc v1 switches](https://www.aliexpress.com/item/4000907409650.html)

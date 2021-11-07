@@ -4,20 +4,14 @@
  * SPDX-License-Identifier: MIT
  */
 
-// Tap hold and OS X shortcuts
-#define TH_V	 &th LS(LG(V)) V
-#define TH_M	 &th LG(V) M
-#define TH_COMMA &th LG(C) COMMA
-#define TH_DOT	 &th LG(X) DOT
-#define TH_FSLH	 &th LG(Z) FSLH
+// Bottom row clipboard and OS X macros
+#define TH(k1,k2,k3,k4) &th LG(V) k1 &th LG(C) k2 &th LG(X) k3 &th LG(Z) k4
 #define Z_SLEEP	 &kp LA(LG(C_PWR))
 #define Z_SHUT	 &kp LA(LG(LC(C_PWR)))
 
 // Home row mod macros
-#define HMS(k)	&hm LSHFT k
-#define HMA(k)	&hm LALT k
-#define HMC(k)	&hm LCTRL k
-#define HMG(k)	&hm LGUI k
+#define HRML(k1,k2,k3,k4) &hm LSHFT k1 &hm LALT k2 &hm LCTRL k3 &hm LGUI k4
+#define HRMR(k1,k2,k3,k4) &hm LGUI k1 &hm LCTRL k2 &hm LALT k3 &hm LSHFT k4
 
 // Layers
 #define BSE 0
