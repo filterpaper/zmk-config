@@ -16,10 +16,10 @@ The C preprocessor in `combos.dtsi` simplifies combos into one-liners in the for
 COMBO(name, bindings, key positions)
 ```
 ## Home Row Mods
-Another set of C preprocessors to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions while keeping keymap bindings tidy:
+Two macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) position while keeping keymap bindings tidy:
 ```c
-#define HRML(k1,k2,k3,k4) &hm LSHFT k1 &hm LALT k2 &hm LCTRL k3 &hm LGUI k4
-#define HRMR(k1,k2,k3,k4) &hm LGUI k1 &hm LCTRL k2 &hm LALT k3 &hm LSHFT k4
+#define HRML(k1,k2,k3,k4) &hm LSHFT k1  &hm LALT k2  &hm LCTRL k3  &hm LGUI k4
+#define HRMR(k1,k2,k3,k4) &hm LGUI k1  &hm LCTRL k2  &hm LALT k3  &hm LSHFT k4
 ```
 
 # Useful Links
