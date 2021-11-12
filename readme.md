@@ -27,6 +27,7 @@ Two macros to easily swap [home row mods](https://precondition.github.io/home-ro
 * Customizing [ZMK](https://zmk.dev/docs/customization)
 * @davidphilipbarr's [Hypergolic PCBs](https://github.com/davidphilipbarr/hypergolic)
 * [Sockets](https://github.com/joric/nrfmicro/wiki/Sockets)
+* [Keymapviz](https://github.com/yskoht/keymapviz)
 ## Hardware Parts
 * Mill-Max [socket pins](https://www.digikey.com/product-detail/en/3320-0-00-15-00-00-03-0/ED1134-ND/4147392)
 * Machined [header sockets](https://www.aliexpress.com/item/32852480645.html)
