@@ -42,8 +42,8 @@
 #define TH(k1,k2,k3,k4) &th LG(V) k1  &th LG(C)  k2 &th LG(X) k3  &th LG(Z) k4
 
 // Home row mods
-#define HRML(k1,k2,k3,k4) &hm LSHFT k1  &hm LALT k2  &hm LCTRL k3  &hm LGUI k4
-#define HRMR(k1,k2,k3,k4) &hm LGUI k1  &hm LCTRL k2  &hm LALT k3  &hm LSHFT k4
+#define HRML(k1,k2,k3,k4) &th LSHFT k1  &th LALT k2  &th LCTRL k3  &th LGUI k4
+#define HRMR(k1,k2,k3,k4) &th LGUI k1  &th LCTRL k2  &th LALT k3  &th LSHFT k4
 
 // BT shorcuts
 #define Z_BT_CLR &bt BT_CLR
