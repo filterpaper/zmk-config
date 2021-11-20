@@ -1,8 +1,5 @@
-/*
- * Copyright (c) 2021 @filterpaper
- *
- * SPDX-License-Identifier: MIT
- */
+// Copyright (C) 2021 @filterpaper
+// SPDX-License-Identifier: GPL-2.0+
 
 // Adjusted pin arrangement
 &kscan0 {
