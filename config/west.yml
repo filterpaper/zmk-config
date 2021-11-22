@@ -5,13 +5,13 @@ manifest:
     - name: filterpaper
       url-base: https://github.com/filterpaper
   projects:
-    - name: zmk
-      remote: zmkfirmware
-      revision: main
-      import: app/west.yml
 #    - name: zmk
-#      remote: filterpaper
+#      remote: zmkfirmware
 #      revision: main
 #      import: app/west.yml
+    - name: zmk
+      remote: filterpaper
+      revision: peripheral-reset
+      import: app/west.yml
   self:
     path: config
