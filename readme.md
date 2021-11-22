@@ -25,12 +25,12 @@ Two macros to easily swap [home row mods](https://precondition.github.io/home-ro
 # Useful Links
 * nice!nano v2 [Pinout](https://nicekeyboards.com/docs/nice-nano/pinout-schematic/)
 * Customizing [ZMK](https://zmk.dev/docs/customization)
-* @davidphilipbarr's [Hypergolic PCBs](https://github.com/davidphilipbarr/hypergolic)
+* [Hypergolic PCBs](https://github.com/davidphilipbarr/hypergolic) PCBs
 * [Sockets](https://github.com/joric/nrfmicro/wiki/Sockets)
 * [Keymapviz](https://github.com/yskoht/keymapviz)
 ## Hardware Parts
-* Mill-Max [socket pins](https://www.digikey.com/product-detail/en/3320-0-00-15-00-00-03-0/ED1134-ND/4147392)
 * Machined [header sockets](https://www.aliexpress.com/item/32852480645.html)
+* Mill-Max [pins](https://www.digikey.com/product-detail/en/3320-0-00-15-00-00-03-0/ED1134-ND/4147392)
 * [301230](https://www.aliexpress.com/item/4000336497558.html) Li-po batteries
 * [MSK-12C02](https://www.aliexpress.com/item/1005001398386692.html) SMD Switch
 * [Silicone bumper](https://www.aliexpress.com/item/32912066603.html) feet
