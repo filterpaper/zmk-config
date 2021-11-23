@@ -16,5 +16,7 @@ compatible = "zmk,combos";
 		key-positions = <keypos>;     \
 	};
 
-COMBO(VOLU,	&kp C_VOL_UP, 5 15)
+COMBO(VOLU,	&kp C_VOL_UP,  5 15)
 COMBO(VOLD,	&kp C_VOL_DN, 15 25)
+
+COMBO(numb,	&tog NUM, 32 33)
