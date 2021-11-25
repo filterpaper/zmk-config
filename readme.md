@@ -3,7 +3,7 @@ Personal ZMK configuration for 34-key Cradio ([Hypergolic](https://github.com/da
 
 # Code Snippets
 ## Combos
-The C preprocessor in `combos.dtsi` simplifies combos into one-liners in the format of:
+The C preprocessor in `combos.h` simplifies combos into one-liners in the format of:
 ```c
 #define COMBO(name, keypress, keypos) \
     combo_##name {                    \

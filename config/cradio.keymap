@@ -14,7 +14,7 @@
 
 / {
 	combos {
-		#include "combos.dtsi"
+		#include "combos.h"
 	};
 
 	behaviors {
