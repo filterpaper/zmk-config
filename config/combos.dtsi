@@ -23,5 +23,5 @@ COMBO(VOLD,	&kp C_VOL_DN, 15 25)
 COMBO(numb,	&tog NUM, 32 33)
 
 // vimac
-COMBO(vimacf, &kp LC(LA(LG(F))), 12 13)
-COMBO(vimacj, &kp LC(LA(LG(J))), 16 17)
+COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
+COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
