@@ -20,7 +20,7 @@ COMBO(VOLU,	&kp C_VOL_UP,  5 15)
 COMBO(VOLD,	&kp C_VOL_DN, 15 25)
 
 // layer toggle
-COMBO(numb,	&tog NUM, 32 33)
+COMBO(numb,	&tog NUM, 32 25)
 
 // vimac
 COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
