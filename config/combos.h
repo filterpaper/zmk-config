@@ -11,7 +11,7 @@ compatible = "zmk,combos";
 #define COMBO(name, keypress, keypos) \
 	combo_##name {                    \
 		layers = <0>;                 \
-		timeout-ms = <20>;            \
+		timeout-ms = <25>;            \
 		bindings = <keypress>;        \
 		key-positions = <keypos>;     \
 	};
