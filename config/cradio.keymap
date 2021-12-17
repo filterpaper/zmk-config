@@ -9,7 +9,8 @@
 
 &lt {
 	tapping-term-ms = <200>;
-	quick_tap_ms = <200>;
+	quick_tap_ms = <100>;
+	flavor = "hold-preferred";
 };
 
 / {
@@ -23,7 +24,7 @@
 			label = "tap_hold";
 			#binding-cells = <2>;
 			tapping-term-ms = <220>;
-			quick_tap_ms = <0>;
+			quick_tap_ms = <100>;
 			flavor = "tap-preferred";
 			bindings = <&kp>, <&kp>;
 		};
