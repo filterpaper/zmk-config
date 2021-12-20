@@ -28,6 +28,13 @@
 			flavor = "tap-preferred";
 			bindings = <&kp>, <&kp>;
 		};
+		gresc: grave_escape {
+			compatible = "zmk,behavior-mod-morph";
+			label = "grave_escape";
+			#binding-cells = <0>;
+			mods = <(MOD_LGUI|MOD_RGUI)>;
+			bindings = <&kp ESC>, <&kp GRAVE>;
+		};
 	};
 
 	keymap {
