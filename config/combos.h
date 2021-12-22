@@ -16,12 +16,13 @@ compatible = "zmk,combos";
 		key-positions = <keypos>;     \
 	};
 
-COMBO(VOLU,	&kp C_VOL_UP,  5 15)
-COMBO(VOLD,	&kp C_VOL_DN, 15 25)
-
+COMBO(VOLU,	&kp C_VOL_UP,  9 19)
+COMBO(VOLD,	&kp C_VOL_DN, 19 29)
 // layer toggle
 COMBO(numb,	&tog NUM, 33 25)
-
 // vimac
 COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
 COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
+// discord
+COMBO(dis_up, &kb LF(LA(UARW)),  8, 18)
+COMBO(dis_dn, &kb LF(LA(DARW)), 18, 28)
