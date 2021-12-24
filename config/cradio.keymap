@@ -9,7 +9,7 @@
 
 &lt {
 	tapping-term-ms = <200>;
-	quick_tap_ms = <150>;
+	quick-tap-ms = <120>;
 	flavor = "hold-preferred";
 };
 
@@ -24,7 +24,7 @@
 			label = "tap_hold";
 			#binding-cells = <2>;
 			tapping-term-ms = <220>;
-			quick_tap_ms = <150>;
+			quick-tap-ms = <120>;
 			flavor = "tap-preferred";
 			bindings = <&kp>, <&kp>;
 		};
@@ -48,7 +48,7 @@
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      TH(M,       COMMA,       DOT,       FSLH)
 		//╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-			                       &lt SYM TAB  &th RS(RALT) ENTER   &th RSHFT SPACE  &lt NUM BSPC
+			                          &lt SYM TAB  &th RCTRL ENTER   &th RSHFT SPACE  &lt NUM BSPC
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
