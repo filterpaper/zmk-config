@@ -23,6 +23,3 @@ COMBO(numb,	&tog NUM, 33 25)
 // vimac
 COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
 COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
-// discord
-COMBO(dis_up, &kp LS(LA(UARW)),  8 18)
-COMBO(dis_dn, &kp LS(LA(DARW)), 18 28)
