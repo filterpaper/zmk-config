@@ -30,6 +30,7 @@ Two macros to easily swap [home row mods](https://precondition.github.io/home-ro
 * [Keymapviz](https://github.com/yskoht/keymapviz)
 ## Hardware Parts
 * Machined [header sockets](https://www.aliexpress.com/item/32852480645.html)
+* Mill-Max [315-43-164-41-001000](https://www.digikey.com/en/products/detail/mill-max-manufacturing-corp/315-43-164-41-001000/1212142) sockets
 * Mill-Max [connector pins](https://www.digikey.com/product-detail/en/3320-0-00-15-00-00-03-0/ED1134-ND/4147392)
 * [301230](https://www.aliexpress.com/item/4000336497558.html) Li-po batteries
 * [MSK-12C02](https://www.aliexpress.com/item/1005001398386692.html) SMD Switch
