@@ -25,7 +25,7 @@ Two macros to easily swap [home row mods](https://precondition.github.io/home-ro
 # Useful Links
 * nice!nano v2 [Pinout](https://nicekeyboards.com/docs/nice-nano/pinout-schematic/)
 * Customizing [ZMK](https://zmk.dev/docs/customization)
-* [Hypergolic PCBs](https://github.com/davidphilipbarr/hypergolic) PCBs
+* [Hypergolic](https://github.com/davidphilipbarr/hypergolic) PCBs
 * [Sockets](https://github.com/joric/nrfmicro/wiki/Sockets)
 * [Keymapviz](https://github.com/yskoht/keymapviz)
 ## Hardware Parts
