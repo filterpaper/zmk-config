@@ -23,6 +23,9 @@ COMBO(numb,	&tog NUM, 33 25)
 // vimac
 COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
 COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
-
+// navigation
 COMBO(up,   &kp LS(LA(UARW)),  6  7)
 COMBO(down, &kp LS(LA(DARW)), 26 27)
+// local bootloader
+COMBO(rst_l, &bootloader,  4 20 24)
+COMBO(rst_r, &bootloader,  5 25 29)
