@@ -16,13 +16,14 @@ compatible = "zmk,combos";
 		key-positions = <keypos>;     \
 	};
 
-COMBO(VOLU,	&kp C_VOL_UP,  9 19)
-COMBO(VOLD,	&kp C_VOL_DN, 19 29)
 // layer toggle
 COMBO(numb,	&tog NUM, 33 25)
-// vimac
+// vimac shortcuts
 COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
 COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
 // navigation
-COMBO(up,   &kp LS(LA(UARW)),  6  7)
-COMBO(down, &kp LS(LA(DARW)), 26 27)
+COMBO(up,   &kp LS(LA(UARW)),  5  6)
+COMBO(down, &kp LS(LA(DARW)), 25 26)
+// volume controls
+COMBO(VOLU,	&kp C_VOL_UP,  9 19)
+COMBO(VOLD,	&kp C_VOL_DN, 19 29)
