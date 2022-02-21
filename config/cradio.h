@@ -32,16 +32,14 @@
 #define FNC 4
 
 // Keymap macros
-#define Z_SLEEP	 &kp LA(LG(C_PWR))
-#define Z_SHUT	 &kp LA(LG(LC(C_PWR)))
-#define NAV_UP &kp LS(LA(UARW))
-#define NAV_DN &kp LS(LA(DARW))
-
+#define Z_SLEEP  &kp LA(LG(C_PWR))
+#define Z_SHUT   &kp LA(LG(LC(C_PWR)))
 #define Z_BT_CLR &bt BT_CLR
 #define Z_BT_0   &bt BT_SEL 0
 #define Z_BT_1   &bt BT_SEL 1
 #define Z_BT_2   &bt BT_SEL 2
-
+#define NAV_UP   &kp LS(LA(UARW))
+#define NAV_DN   &kp LS(LA(DARW))
 #define ________ &trans
 
 // Clipboard shortcuts
