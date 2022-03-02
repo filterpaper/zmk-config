@@ -34,6 +34,9 @@
 // Keymap macros
 #define Z_SLEEP  &kp LA(LG(C_PWR))
 #define Z_SHUT   &kp LA(LG(LC(C_PWR)))
+#define Z_BOOT   &bootloader
+#define Z_VOL_UP &kp C_VOL_UP
+#define Z_VOL_DN &kp C_VOL_DN
 #define Z_BT_CLR &bt BT_CLR
 #define Z_BT_0   &bt BT_SEL 0
 #define Z_BT_1   &bt BT_SEL 1
@@ -49,7 +52,7 @@
 #define HRML(k1,k2,k3,k4) &th LSHFT k1  &th LALT k2  &th LCTRL k3  &th LGUI k4
 #define HRMR(k1,k2,k3,k4) &th LGUI k1  &th LCTRL k2  &th LALT k3  &th LSHFT k4
 
-// Combos
+// Combo macro
 #define COMBO(name, keypress, keypos) \
 combo_##name {                        \
 	layers = <0>;                     \
