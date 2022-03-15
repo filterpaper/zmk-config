@@ -45,12 +45,12 @@
 #define NAV_DN   &kp LS(LA(DARW))
 #define ________ &trans
 
-// Clipboard shortcuts
-#define TH(k1,k2,k3,k4) &th LG(V) k1  &th LG(C)  k2 &th LG(X) k3  &th LG(Z) k4
+// Clipboard shortcuts using hold tap
+#define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
 
-// Home row mods
-#define HRML(k1,k2,k3,k4) &th LSHFT k1  &th LALT k2  &th LCTRL k3  &th LGUI k4
-#define HRMR(k1,k2,k3,k4) &th LGUI k1  &th LCTRL k2  &th LALT k3  &th LSHFT k4
+// Home row mods using positional hold tap
+#define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
+#define HRMR(k1,k2,k3,k4) &rht LGUI k1  &rht LCTRL k2  &rht LALT k3  &rht LSHFT k4
 
 // Combo macro
 #define COMBO(name, keypress, keypos) \

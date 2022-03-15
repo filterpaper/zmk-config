@@ -19,21 +19,41 @@
 
 / {
 	behaviors {
-		th: tap_hold {
-			compatible = "zmk,behavior-hold-tap";
-			label = "tap_hold";
-			#binding-cells = <2>;
-			tapping-term-ms = <200>;
-			quick-tap-ms = <120>;
-			flavor = "tap-preferred";
-			bindings = <&kp>, <&kp>;
-		};
 		gresc: grave_escape {
 			compatible = "zmk,behavior-mod-morph";
 			label = "grave_escape";
 			#binding-cells = <0>;
 			mods = <(MOD_LGUI|MOD_RGUI)>;
 			bindings = <&kp ESC>, <&kp GRAVE>;
+		};
+		ht: hold_tap {
+			compatible = "zmk,behavior-hold-tap";
+			label = "hold_tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			quick-tap-ms = <120>;
+			bindings = <&kp>, <&kp>;
+		};
+		lht: left_positional_hold_tap {
+			compatible = "zmk,behavior-hold-tap";
+			label = "left_positional_hold_tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			quick-tap-ms = <120>;
+			bindings = <&kp>, <&kp>;
+			hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 32 33>;
+		};
+		rht: right_positional_hold_tap {
+			compatible = "zmk,behavior-hold-tap";
+			label = "right_hold_tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			quick-tap-ms = <120>;
+			bindings = <&kp>, <&kp>;
+			hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31>;
 		};
 	};
 
@@ -63,9 +83,9 @@
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 			HRML(A,        S,         D,         F)     &kp G          &kp H      HRMR(J,        K,         L,        SQT)
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      TH(M,       COMMA,       DOT,       FSLH)
+			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      HT(M,       COMMA,       DOT,       FSLH)
 		//╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-			                       &lt SYM TAB  &th RS(RGUI) ENTER   &th RSHFT SPACE  &lt NUM BSPC
+			                      &lt SYM TAB  &ht RS(RGUI) ENTER     &ht RSHFT SPACE  &lt NUM BSPC
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
@@ -76,7 +96,7 @@
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 			HRML(A,        R,         S,         T)     &kp D          &kp H      HRMR(N,        E,         I,         O)
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      TH(M,       COMMA,       DOT,       FSLH)
+			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp K      HT(M,       COMMA,       DOT,       FSLH)
 		//╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
 			                                 ________   ________       ________   ________
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
