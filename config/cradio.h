@@ -45,6 +45,10 @@
 #define NAV_DN   &kp LS(LA(DARW))
 #define ________ &trans
 
+// Hold tap key timers
+#define TAPPING_TERM <200>
+#define QUICK_TAP <120>
+
 // Clipboard shortcuts using hold tap
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
 
