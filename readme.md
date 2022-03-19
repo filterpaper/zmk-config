@@ -1,9 +1,16 @@
 # Summary
 Personal ZMK configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic))
 
-# Code Snippets
+# Macros
+A couple of C preprocessors are defined in `cradio.h` to keep the keymap file tidy.
+## Home Row Mods
+Two macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions in the layout:
+```c
+#define HRML(k1,k2,k3,k4) &hm LSHFT k1  &hm LALT k2  &hm LCTRL k3  &hm LGUI k4
+#define HRMR(k1,k2,k3,k4) &hm LGUI k1  &hm LCTRL k2  &hm LALT k3  &hm LSHFT k4
+```
 ## Combos
-The C preprocessor for combos simplify them into one-liners in the format of:
+Shortcut to simplify combos into one-liners:
 ```c
 #define COMBO(name, keypress, keypos) \
     combo_##name {                    \
@@ -15,11 +22,20 @@ The C preprocessor for combos simplify them into one-liners in the format of:
 
 COMBO(name, bindings, key positions)
 ```
-## Home Row Mods
-Two macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) position while keeping keymap bindings tidy:
+## Macros
+Shortcut for simple key press macros:
 ```c
-#define HRML(k1,k2,k3,k4) &hm LSHFT k1  &hm LALT k2  &hm LCTRL k3  &hm LGUI k4
-#define HRMR(k1,k2,k3,k4) &hm LGUI k1  &hm LCTRL k2  &hm LALT k3  &hm LSHFT k4
+#define MACRO(name, keys)                  \
+    name: name##_macro {                   \
+        label = #name;                     \
+        compatible = "zmk,behavior-macro"; \
+        #binding-cells = <0>;              \
+        wait-ms = <1>;                     \
+        tap-ms = <1>;                      \
+        bindings = <keys>;                 \
+    };
+
+MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
 ```
 
 # Useful Links

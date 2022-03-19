@@ -1,4 +1,4 @@
-// Copyright 2021 @filterpaper
+// Copyright 2022 @filterpaper
 // SPDX-License-Identifier: MIT
 
 // Adjusted pin arrangement
@@ -49,14 +49,15 @@
 #define TAPPING_TERM <200>
 #define QUICK_TAP    <120>
 
-#define HYPR(k) LS(LC(LA(LG(k))))
-
-// Clipboard shortcuts hold tap
+// Clipboard shortcut hold tap
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
 
 // Home row mods positional hold tap
 #define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
-#define HRMR(k1,k2,k3,k4) &rht LGUI k1  &rht LCTRL k2  &rht LALT k3  &rht LSHFT k4
+#define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
+
+// Hyper modifier
+#define HYPR(k) LS(LC(LA(LG(k))))
 
 // Combo macro
 #define COMBO(name, keypress, keypos) \
@@ -65,4 +66,15 @@ combo_##name {                        \
 	timeout-ms = <25>;                \
 	bindings = <keypress>;            \
 	key-positions = <keypos>;         \
+};
+
+// Macro macro
+#define MACRO(name, keys)             \
+name: name##_macro {                  \
+	label = #name;                    \
+	compatible = "zmk,behavior-macro";\
+	#binding-cells = <0>;             \
+	wait-ms = <1>;                    \
+	tap-ms = <1>;                     \
+	bindings = <keys>;                \
 };
