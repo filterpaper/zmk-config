@@ -34,7 +34,6 @@
 // Keymap macros
 #define Z_SLEEP  &kp LA(LG(C_PWR))
 #define Z_SHUT   &kp LA(LG(LC(C_PWR)))
-#define Z_BOOT   &bootloader
 #define Z_VOL_UP &kp C_VOL_UP
 #define Z_VOL_DN &kp C_VOL_DN
 #define Z_BT_CLR &bt BT_CLR
@@ -43,16 +42,19 @@
 #define Z_BT_2   &bt BT_SEL 2
 #define NAV_UP   &kp LS(LA(UARW))
 #define NAV_DN   &kp LS(LA(DARW))
+#define Z_BOOT   &bootloader
 #define ________ &trans
 
 // Hold tap key timers
 #define TAPPING_TERM <200>
-#define QUICK_TAP <120>
+#define QUICK_TAP    <120>
 
-// Clipboard shortcuts using hold tap
+#define HYPR(k) LS(LC(LA(LG(k))))
+
+// Clipboard shortcuts hold tap
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
 
-// Home row mods using positional hold tap
+// Home row mods positional hold tap
 #define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
 #define HRMR(k1,k2,k3,k4) &rht LGUI k1  &rht LCTRL k2  &rht LALT k3  &rht LSHFT k4
 

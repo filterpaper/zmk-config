@@ -13,6 +13,12 @@
 	flavor = "hold-preferred";
 };
 
+&mt {
+	tapping-term-ms = TAPPING_TERM;
+	quick-tap-ms = QUICK_TAP;
+	flavor = "balanced";
+};
+
 &caps_word {
 	continue-list = <UNDER MINUS BSPC>;
 };
@@ -26,16 +32,16 @@
 			mods = <(MOD_LGUI|MOD_RGUI)>;
 			bindings = <&kp ESC>, <&kp GRAVE>;
 		};
-		ht: hold_tap {
+		ht: clipboard_hold_tap {
 			compatible = "zmk,behavior-hold-tap";
-			label = "hold_tap";
+			label = "clipboard_hold_tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = TAPPING_TERM;
 			quick-tap-ms = QUICK_TAP;
 			bindings = <&kp>, <&kp>;
 		};
-		lht: left_positional_hold_tap {
+		lht: left_home_row_mods_positional_hold_tap {
 			compatible = "zmk,behavior-hold-tap";
 			label = "left_positional_hold_tap";
 			#binding-cells = <2>;
@@ -45,9 +51,9 @@
 			bindings = <&kp>, <&kp>;
 			hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 30 31 32 33>;
 		};
-		rht: right_positional_hold_tap {
+		rht: right_home_row_mods_positional_hold_tap {
 			compatible = "zmk,behavior-hold-tap";
-			label = "right_hold_tap";
+			label = "left_positional_hold_tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = TAPPING_TERM;
@@ -67,8 +73,8 @@
 		// layer toggle
 		COMBO(numb,   &tog NUM, 33 25)
 		// vimac shortcuts
-		COMBO(vimacf, &kp LS(LC(LA(LG(F)))), 12 13)
-		COMBO(vimacj, &kp LS(LC(LA(LG(J)))), 16 17)
+		COMBO(vimacf, &kp HYPR(F), 12 13)
+		COMBO(vimacj, &kp HYPR(J), 16 17)
 		// volume controls
 		COMBO(vol_up, &kp C_VOL_UP,  9 19)
 		COMBO(vol_dn, &kp C_VOL_DN, 19 29)
@@ -85,7 +91,7 @@
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp N      HT(M,       COMMA,       DOT,       FSLH)
 		//╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-			                      &lt SYM TAB  &ht RS(RGUI) ENTER     &ht RSHFT SPACE  &lt NUM BSPC
+			                      &lt SYM TAB  &mt RS(RGUI) ENTER     &mt RSHFT SPACE  &lt NUM BSPC
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
