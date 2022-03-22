@@ -46,8 +46,9 @@
 #define ________ &trans
 
 // Hold tap key timers
+#define QUICK_TAP    <180>
 #define TAPPING_TERM <200>
-#define QUICK_TAP    <120>
+#define PHT_TERM     <250>
 
 // Clipboard shortcut hold tap
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
