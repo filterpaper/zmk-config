@@ -63,7 +63,7 @@ jobs:
             zephyr/
             bootloader/
             zmk/
-          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.cache-name }}-${{ hashFiles('config/west.yml') }}
+          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.cache-name }}-${{ hashFiles('**/west.yml') }}
           restore-keys: |
             ${{ runner.os }}-${{ runner.arch }}-${{ env.cache-name }}-
             ${{ runner.os }}-${{ runner.arch }}-
