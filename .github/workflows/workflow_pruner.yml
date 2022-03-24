@@ -1,7 +1,0 @@
-name: Workflow Run Pruner
-on:
-  workflow_dispatch:
-
-jobs:
-  prune:
-    uses: filterpaper/qmk_userspace/.github/workflows/workflow_pruner.yml@main

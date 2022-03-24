@@ -1,0 +1,7 @@
+name: Delete Old Workflow
+on:
+  workflow_dispatch:
+
+jobs:
+  run:
+    uses: filterpaper/qmk_userspace/.github/workflows/delete_workflow.yml@main
