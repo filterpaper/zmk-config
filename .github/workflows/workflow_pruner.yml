@@ -1,9 +1,7 @@
-# workflow_pruner.yml
-# This workflow prunes old workflow runs for an entire repository.
 name: Workflow Run Pruner
 on:
   workflow_dispatch:
 
 jobs:
   prune:
-    uses: filterpaper/workflows/.github/workflows/workflow_pruner.yml@main
+    uses: filterpaper/qmk_userspace/.github/workflows/workflow_pruner.yml@main
