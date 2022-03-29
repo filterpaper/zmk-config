@@ -53,7 +53,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Cache west modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-zephyr-modules
         with:
@@ -107,4 +107,4 @@ jobs:
         with:
           name: firmware
           path: build/artifacts
-          retention-days: 2
+          retention-days: 30
