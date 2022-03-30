@@ -58,7 +58,7 @@
 #define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
 
 // Hyper modifier
-#define HYPR(k) LS(LC(LA(LG(k))))
+#define HYPR(k) &kp LS(LC(LA(LG(k))))
 
 // Combo macro
 #define COMBO(name, keypress, keypos) \

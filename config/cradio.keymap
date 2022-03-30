@@ -142,11 +142,11 @@
 		// layer toggle
 		COMBO(numb,   &tog NUM, 25 33)
 		// volume controls
-		COMBO(vol_up, &kp C_VOL_UP,  9 19)
-		COMBO(vol_dn, &kp C_VOL_DN, 19 29)
+		COMBO(vol_up, Z_VOL_UP,  9 19)
+		COMBO(vol_dn, Z_VOL_DN, 19 29)
 		// vimac shortcuts
-		COMBO(vimacf, &kp HYPR(F), 12 13)
-		COMBO(vimacj, &kp HYPR(J), 16 17)
+		COMBO(vimacf, HYPR(F), 12 13)
+		COMBO(vimacj, HYPR(J), 16 17)
 		// invoke macros
 		COMBO(vim_q,  &vim_q,   0 1)
 		COMBO(vim_s,  &vim_s,  20 21)
