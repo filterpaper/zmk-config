@@ -48,14 +48,15 @@ jobs:
           echo ::set-output name=extra-cmake-args::${EXTRA_CMAKE_ARGS}
           echo ::set-output name=artifact-name::${ARTIFACT_NAME}
           echo ::set-output name=display-name::${DISPLAY_NAME}
+          echo ::set-output name=zephyr-version::${ZEPHYR_VERSION}
 
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Cache west modules
-        uses: actions/cache@v3
+        uses: actions/cache@v3.0.1
         env:
-          cache-name: cache-zephyr-modules
+          cache-name: cache-zephyr-${{ steps.variables.outputs.zephyr-version }}-modules
         with:
           path: |
             modules/
@@ -63,11 +64,10 @@ jobs:
             zephyr/
             bootloader/
             zmk/
-          key: ${{ runner.os }}-${{ runner.arch }}-${{ env.cache-name }}-${{ hashFiles('**/west.yml') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('config/west.yml') }}
           restore-keys: |
-            ${{ runner.os }}-${{ runner.arch }}-${{ env.cache-name }}-
-            ${{ runner.os }}-${{ runner.arch }}-
-            ${{ runner.os }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
 
       - name: West Init
         run: west init -l config
@@ -81,12 +81,6 @@ jobs:
       - name: West Build (${{ steps.variables.outputs.display-name }})
         run: |
           west build -s zmk/app -b ${{ matrix.board }} -- -DZMK_CONFIG=${GITHUB_WORKSPACE}/config ${{ steps.variables.outputs.extra-cmake-args }} ${{ matrix.cmake-args }}
-
-      - name: ${{ steps.variables.outputs.display-name }} DTS File
-        if: ${{ always() }}
-        run: |
-          if [ -f "build/zephyr/${{ matrix.board }}.dts.pre.tmp" ]; then cat -n build/zephyr/${{ matrix.board }}.dts.pre.tmp; fi
-          if [ -f "build/zephyr/zephyr.dts" ]; then cat -n build/zephyr/zephyr.dts; fi
 
       - name: ${{ steps.variables.outputs.display-name }} Kconfig file
         run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
