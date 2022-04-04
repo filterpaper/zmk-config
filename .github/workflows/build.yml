@@ -48,6 +48,7 @@ jobs:
           echo ::set-output name=extra-cmake-args::${EXTRA_CMAKE_ARGS}
           echo ::set-output name=artifact-name::${ARTIFACT_NAME}
           echo ::set-output name=display-name::${DISPLAY_NAME}
+          echo ::set-output name=zephyr-version::${ZEPHYR_VERSION}
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -55,7 +56,7 @@ jobs:
       - name: Cache west modules
         uses: actions/cache@v3.0.1
         env:
-          cache-name: cache-zephyr-${ZEPHYR_VERSION}-modules
+          cache-name: cache-zephyr-${{ steps.variables.outputs.zephyr-version }}-modules
         with:
           path: |
             modules/
@@ -63,7 +64,7 @@ jobs:
             zephyr/
             bootloader/
             zmk/
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('config/west.yml') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/west.yml', '**/build.yaml') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
