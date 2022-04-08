@@ -9,11 +9,14 @@ jobs:
     name: Fetch Build Keyboards
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Install yaml2json
         run: python3 -m pip install remarshal
+
       - id: set-matrix
         name: Fetch Build Matrix
         run: |
@@ -32,7 +35,6 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-
       - name: Prepare variables
         id: variables
         run: |
@@ -79,11 +81,10 @@ jobs:
         run: west zephyr-export
 
       - name: West Build (${{ steps.variables.outputs.display-name }})
-        run: |
-          west build -s zmk/app -b ${{ matrix.board }} -- -DZMK_CONFIG=${GITHUB_WORKSPACE}/config ${{ steps.variables.outputs.extra-cmake-args }} ${{ matrix.cmake-args }}
+        run: west build -s zmk/app -b ${{ matrix.board }} -- -DZMK_CONFIG=${GITHUB_WORKSPACE}/config ${{ steps.variables.outputs.extra-cmake-args }} ${{ matrix.cmake-args }}
 
       - name: ${{ steps.variables.outputs.display-name }} Kconfig file
-        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$"
+        run: cat build/zephyr/.config | grep -v "^#" | grep -v "^$" | sort
 
       - name: Rename artifacts
         run: |
