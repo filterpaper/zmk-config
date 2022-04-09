@@ -103,3 +103,10 @@ jobs:
           name: firmware
           path: build/artifacts
           retention-days: 30
+
+  purge:
+    name: Purge
+    needs: build
+    uses: filterpaper/scripts/.github/workflows/delete-workflow.yml@main
+    with:
+      days: 30
