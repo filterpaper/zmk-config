@@ -1,5 +1,5 @@
 # Summary
-Personal ZMK configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic))
+Personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic))
 
 # Macros
 A couple of C preprocessors are defined in `cradio.h` to keep the keymap file tidy.
