@@ -39,7 +39,7 @@
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
-		colemak_layer {
+		CMK_layer {
 			bindings = <
 		//╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
 			&kp Q      &kp W      &kp F      &kp P      &kp G          &kp J      &kp L      &kp U      &kp Y      &kp SQT
@@ -52,7 +52,7 @@
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
-		number_layer {
+		NUM_layer {
 			bindings = <
 		//╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
 			________   &kp N1     &kp N2     &kp N3     Z_VOL_UP       &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
@@ -65,7 +65,7 @@
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
-		symbol_layer {
+		SYM_layer {
 			bindings = <
 		//╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
 			________   &kp LBKT   &kp LBRC   &kp RBRC   ________       &kp CARET  &kp LPAR   &kp RPAR   &kp RBKT   &kp TILDE
@@ -78,7 +78,7 @@
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
-		function_layer {
+		FNC_layer {
 			bindings = <
 		//╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
 			&reset     ________   ________   ________   Z_BT_0         ________   ________   ________   &kp INS    &tog CMK
@@ -118,7 +118,12 @@
 			tapping-term-ms = PHT_TERM;
 			quick-tap-ms = QUICK_TAP;
 			bindings = <&kp>, <&kp>;
-			hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 30 31 32 33>;
+			hold-trigger-key-positions = <
+						 5  6  7  8  9 
+						15 16 17 18 19
+						25 26 27 28 29
+				30 31 32 33
+			>;
 		};
 		rht: right_positional_hold_tap {
 			label = "right_positional_hold_tap";
@@ -128,7 +133,12 @@
 			tapping-term-ms = PHT_TERM;
 			quick-tap-ms = QUICK_TAP;
 			bindings = <&kp>, <&kp>;
-			hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32 33>;
+			hold-trigger-key-positions = <
+				 0  1  2  3  4 
+				10 11 12 13 14 
+				20 21 22 23 24 
+						   30 31 32 33
+			>;
 		};
 	};
 

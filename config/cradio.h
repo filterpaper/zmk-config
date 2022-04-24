@@ -1,7 +1,7 @@
 // Copyright 2022 @filterpaper
 // SPDX-License-Identifier: MIT
 
-// Adjusted pin arrangement
+// Adjust pins for Hypergolic 1.2
 &kscan0 {
 	input-gpios
 	= <&pro_micro_d  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
