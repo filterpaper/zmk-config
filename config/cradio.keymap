@@ -108,6 +108,7 @@
 			flavor = "tap-preferred";
 			tapping-term-ms = TAPPING_TERM;
 			quick-tap-ms = QUICK_TAP;
+			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 		};
 		lht: left_positional_hold_tap {
@@ -115,12 +116,13 @@
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
-			tapping-term-ms = PHT_TERM;
+			tapping-term-ms = TAPPING_TERM;
 			quick-tap-ms = QUICK_TAP;
+			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 			hold-trigger-key-positions = <
 						 5  6  7  8  9 
-						15 16 17 18 19
+				11 12   15 16 17 18 19
 						25 26 27 28 29
 				30 31 32 33
 			>;
@@ -130,12 +132,13 @@
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
-			tapping-term-ms = PHT_TERM;
+			tapping-term-ms = TAPPING_TERM;
 			quick-tap-ms = QUICK_TAP;
+			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 			hold-trigger-key-positions = <
 				 0  1  2  3  4 
-				10 11 12 13 14 
+				10 11 12 13 14   16 17 
 				20 21 22 23 24 
 						   30 31 32 33
 			>;
