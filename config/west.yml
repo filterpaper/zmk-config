@@ -6,8 +6,6 @@ manifest:
       url-base: https://github.com/filterpaper
   projects:
     - name: zmk
-#      remote: filterpaper
-#      revision: main
       remote: zmkfirmware
       revision: main
       import: app/west.yml

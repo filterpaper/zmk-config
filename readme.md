@@ -4,10 +4,10 @@ Personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Crad
 # Macros
 A couple of C preprocessors are defined in `cradio.h` to keep the keymap file tidy.
 ## Home Row Mods
-Two macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions in the layout:
+Macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions in the layout:
 ```c
-#define HRML(k1,k2,k3,k4) &hm LSHFT k1  &hm LALT k2  &hm LCTRL k3  &hm LGUI k4
-#define HRMR(k1,k2,k3,k4) &hm LGUI k1  &hm LCTRL k2  &hm LALT k3  &hm LSHFT k4
+#define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
+#define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
 ```
 ## Combos
 Shortcut to simplify combos into one-liners:
