@@ -1,4 +1,4 @@
-# GitHub Actions matrix for 'board' and 'sheld'
+# GitHub Actions matrix
 ---
 board:
   - nice_nano_v2
