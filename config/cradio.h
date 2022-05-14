@@ -33,7 +33,8 @@
 
 // Keymap macros
 #define Z_SLEEP  &kp LA(LG(C_PWR))
-#define Z_SHUT   &kp LA(LG(LC(C_PWR)))
+#define Z_SHUT   &kp LC(LA(LG(C_PWR)))
+#define Z_SSAVE  &kp LC(LA(LS(LG(S))))
 #define Z_VOL_UP &kp C_VOL_UP
 #define Z_VOL_DN &kp C_VOL_DN
 #define Z_BT_0   &bt BT_SEL 0
@@ -48,9 +49,6 @@
 // Hold tap key timers
 #define QUICK_TAP    <130>
 #define TAPPING_TERM <200>
-
-// Hyper modifier
-#define HYPR(k) &kp LS(LC(LA(LG(k))))
 
 // Clipboard shortcut hold tap
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
