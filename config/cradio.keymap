@@ -20,7 +20,7 @@
 };
 
 &caps_word {
-	continue-list = <UNDER MINUS BSPC>;
+	continue-list = <UNDER MINUS BSPC RSHFT LSHFT>;
 };
 
 / {
