@@ -50,12 +50,12 @@
 #define QUICK_TAP    <150>
 #define TAPPING_TERM <220>
 
-// Clipboard shortcut hold tap
+// Clipboard shortcuts
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
 
-// Home row mods positional hold tap
-#define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
-#define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
+// Home row mods hold tap
+#define HRML(k1,k2,k3,k4) &mt LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
+#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &mt RSHFT k4
 
 // Combo macro
 #define COMBO(name, keypress, keypos) \
