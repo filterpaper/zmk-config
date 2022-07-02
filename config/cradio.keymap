@@ -9,14 +9,14 @@
 
 &lt {
 	flavor = "hold-preferred";
-	tapping-term-ms = TAPPING_TERM;
-	quick-tap-ms = QUICK_TAP;
+	tapping-term-ms = <TAPPING_TERM>;
+	quick-tap-ms = <QUICK_TAP>;
 };
 
 &mt {
 	flavor = "balanced";
-	tapping-term-ms = TAPPING_TERM;
-	quick-tap-ms = QUICK_TAP;
+	tapping-term-ms = <TAPPING_TERM>;
+	quick-tap-ms = <QUICK_TAP>;
 };
 
 &caps_word {
@@ -106,8 +106,18 @@
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
-			tapping-term-ms = TAPPING_TERM;
-			quick-tap-ms = QUICK_TAP;
+			tapping-term-ms = <TAPPING_TERM>;
+			quick-tap-ms = <QUICK_TAP>;
+			global-quick-tap;
+			bindings = <&kp>, <&kp>;
+		};
+		sht: shift_hold_tap {
+			label = "shift_hold_tap";
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <SHIFT_TAPPING_TERM>;
+			quick-tap-ms = <QUICK_TAP>;
 			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 		};
