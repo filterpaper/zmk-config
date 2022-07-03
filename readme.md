@@ -2,12 +2,12 @@
 Personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic))
 
 # Macros
-A couple of C preprocessors are defined in `cradio.h` to keep the keymap file tidy.
+C preprocessors are defined in `cradio.h` to keep the keymap file tidy.
 ## Home Row Mods
-Macros to easily swap [home row mods](https://precondition.github.io/home-row-mods) positions in the layout:
+Macros to easily set [home row mods](https://precondition.github.io/home-row-mods) on the keymap:
 ```c
-#define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
-#define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
+#define HRML(k1,k2,k3,k4) &mt LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
+#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &mt RSHFT k4
 ```
 ## Combos
 Shortcut to simplify combos into one-liners:
