@@ -138,6 +138,9 @@
 		COMBO(vim_q,  &vim_q,   0  1)
 		COMBO(vim_s,  &vim_s,  20 21)
 		COMBO(dir_up, &dir_up, 28 29)
+		// navigation
+		COMBO(nav_dn, NAV_DN,  26 27)
+		COMBO(nav_up, NAV_UP,  27 28)
 	};
 
 	macros {

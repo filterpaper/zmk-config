@@ -47,9 +47,9 @@
 #define ________ &trans
 
 // Hold tap key timers
-#define QUICK_TAP    150
+#define QUICK_TAP    125
 #define TAPPING_TERM 200
-#define SHIFT_TAPPING_TERM 170
+#define SHIFT_TAPPING_TERM 180
 
 // Clipboard shortcuts
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C)  k2 &ht LG(X) k3  &ht LG(Z) k4
@@ -62,7 +62,7 @@
 #define COMBO(name, keypress, keypos) \
 combo_##name {                        \
 	layers = <0>;                     \
-	timeout-ms = <25>;                \
+	timeout-ms = <30>;                \
 	bindings = <keypress>;            \
 	key-positions = <keypos>;         \
 };
