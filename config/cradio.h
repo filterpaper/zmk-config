@@ -35,15 +35,8 @@
 #define Z_SLEEP  &kp LA(LG(C_PWR))
 #define Z_SHUT   &kp LC(LA(LG(C_PWR)))
 #define Z_SSAVE  &kp LC(LA(LS(LG(S))))
-#define Z_VOL_UP &kp C_VOL_UP
-#define Z_VOL_DN &kp C_VOL_DN
-#define Z_BT_0   &bt BT_SEL 0
-#define Z_BT_1   &bt BT_SEL 1
-#define Z_BT_2   &bt BT_SEL 2
-#define Z_BT_CLR &bt BT_CLR
 #define NAV_UP   &kp LS(LA(UARW))
 #define NAV_DN   &kp LS(LA(DARW))
-#define Z_BOOT   &bootloader
 #define ________ &trans
 
 // Hold tap key timers
