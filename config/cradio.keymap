@@ -111,14 +111,25 @@
 			global-quick-tap;
 			bindings = <&kp>, <&kp>;
 		};
-		sht: shift_hold_tap {
-			label = "shift_hold_tap";
+		lht: left_positional_hold_tap {
+			label = "left_positional_hold_tap";
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <TAPPING_TERM>;
 			quick-tap-ms = <QUICK_TAP>;
 			bindings = <&kp>, <&kp>;
+			hold-trigger-key-positions = <LEFT_HOLD_TRIGGER_KEYS>;
+		};
+		rht: right_positional_hold_tap {
+			label = "right_positional_hold_tap";
+			compatible = "zmk,behavior-hold-tap";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <TAPPING_TERM>;
+			quick-tap-ms = <QUICK_TAP>;
+			bindings = <&kp>, <&kp>;
+			hold-trigger-key-positions = <RIGHT_HOLD_TRIGGER_KEYS>;
 		};
 	};
 
