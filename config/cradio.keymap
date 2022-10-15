@@ -46,6 +46,7 @@
 			compatible = "zmk,behavior-mod-morph";
 			#binding-cells = <0>;
 			mods = <(MOD_LGUI|MOD_RGUI)>;
+			keep-mods = <(MOD_RGUI)>;
 			bindings = <&kp ESC>, <&kp GRAVE>;
 		};
 		ht: hold_tap {
