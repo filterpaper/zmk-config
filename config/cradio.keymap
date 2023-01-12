@@ -138,7 +138,7 @@ name: name##_macro {                  \
 / {
 	macros {
 		MACRO(vim_q,  &kp COLON &kp Q &kp EXCL)
-		MACRO(vim_s,  &kp COLON &kp W &kp Q)
+		MACRO(vim_s,  &kp COLON &kp X)
 		MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
 	};
 };

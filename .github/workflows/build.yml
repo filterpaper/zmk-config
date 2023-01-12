@@ -3,8 +3,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    uses: petejohanson/zmk/.github/workflows/build-user-config.yml@build/test-zmk-docker-3.2-toolchain
-#    uses: filterpaper/scripts/.github/workflows/build-user-config.yml@main
+    uses: filterpaper/scripts/.github/workflows/build-user-config.yml@main
 
   purge:
     uses: filterpaper/scripts/.github/workflows/delete-workflow.yml@main
