@@ -108,7 +108,7 @@ combo_##name {                        \
 / {
 	combos {
 		compatible = "zmk,combos";
-		COMBO(numb,   &tog NUM,     25 33)
+		COMBO(numb,   &tog NUM,     25 26 33)
 		COMBO(vol_up, &kp C_VOL_UP,  9 19)
 		COMBO(vol_dn, &kp C_VOL_DN, 19 29)
 		// invoke macros
@@ -163,7 +163,7 @@ name: name##_macro {                  \
 		//│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
 			&kp Z      &kp X      &kp C      &kp V      &kp B          &kp N       HT(M,      COMMA,       DOT,      FSLH)
 		//╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-			                      &lt SYM TAB  &mt LC(LALT) ENTER     &mt RSHFT SPACE  &lt NUM BSPC
+			                      &lt SYM TAB  &mt LC(LALT) ENTER     &ht RSHFT SPACE  &lt NUM BSPC
 		//                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
 			>;
 		};
