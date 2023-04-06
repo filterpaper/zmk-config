@@ -1,10 +1,7 @@
 # GitHub Actions matrix
 ---
 board:
-  - nice_nano_v2
+- nice_nano_v2
 shield:
-# - cradio_left
-# - cradio_right
-  - hypergolic_left
-  - hypergolic_right
-# - settings_reset
+- hypergolic_left
+- hypergolic_right
