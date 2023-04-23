@@ -37,7 +37,7 @@
 };
 
 &caps_word {
-	continue-list = <UNDER MINUS BSPC RSHFT LSHFT>;
+	continue-list = <UNDER MINUS BSPC LSHFT RSHFT LS(SPACE) RS(SPACE)>;
 };
 
 
@@ -111,6 +111,7 @@ combo_##name {                        \
 		COMBO(numb,   &tog NUM,     25 26 33)
 		COMBO(vol_up, &kp C_VOL_UP,  9 19)
 		COMBO(vol_dn, &kp C_VOL_DN, 19 29)
+		COMBO(caps_w, &caps_word,   10 19)
 		// invoke macros
 		COMBO(vim_q,  &vim_q,   0  1)
 		COMBO(vim_s,  &vim_s,  20 21)
