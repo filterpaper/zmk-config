@@ -1,10 +1,14 @@
 name: Build ZMK firmware
-on: [push, workflow_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+    - '**.md'
 
 jobs:
   build:
-    uses: filterpaper/scripts/.github/workflows/build-user-config.yml@main
-#    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+#    uses: filterpaper/scripts/.github/workflows/build-user-config.yml@main
 
   purge:
     uses: filterpaper/scripts/.github/workflows/purge-workflow.yml@main

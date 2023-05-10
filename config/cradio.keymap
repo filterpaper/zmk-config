@@ -6,23 +6,13 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define BSE 0
 #define CMK 1
 #define NUM 2
 #define SYM 3
 #define FNC 4
 
-#define Z_SLEEP  &kp LA(LG(C_PWR))
-#define Z_SSAVE  &kp LC(LA(LS(LG(S))))
-#define NAV_UP   &kp LS(LA(UARW))
-#define NAV_DN   &kp LS(LA(DARW))
-#define ________ &trans
-
-#define BT(n) BT_SEL n
-
 #define TAPPING_TERM 210
 #define QUICK_TAP    150
-
 
 &lt {
 	flavor = "hold-preferred";
@@ -65,7 +55,7 @@
 			label = "left_positional_hold_tap";
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
-			flavor = "tap-preferred";
+			flavor = "balanced";
 			tapping-term-ms = <TAPPING_TERM>;
 			quick-tap-ms = <QUICK_TAP>;
 			bindings = <&kp>, <&kp>;
@@ -79,7 +69,7 @@
 			label = "right_positional_hold_tap";
 			compatible = "zmk,behavior-hold-tap";
 			#binding-cells = <2>;
-			flavor = "tap-preferred";
+			flavor = "balanced";
 			tapping-term-ms = <TAPPING_TERM>;
 			quick-tap-ms = <QUICK_TAP>;
 			bindings = <&kp>, <&kp>;
@@ -145,6 +135,13 @@ name: name##_macro {                  \
 };
 
 
+#define Z_SLEEP  &kp LA(LG(C_PWR))
+#define Z_SSAVE  &kp LC(LA(LS(LG(S))))
+#define NAV_UP   &kp LS(LA(UARW))
+#define NAV_DN   &kp LS(LA(DARW))
+#define ________ &trans
+
+#define BT(n) BT_SEL n
 #define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
 #define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C) k2  &ht LG(X) k3  &ht LG(Z) k4
@@ -220,10 +217,10 @@ name: name##_macro {                  \
 			bindings = <
 		//╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
 		//│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │ COLEMAK  │
-		   &sys_reset  ________   ________   ________  &bt BT(0)       ________   ________   ________   ________   &tog CMK
+		   &sys_reset  ________   ________   ________  &bt BT(0)     &out OUT_BLE ________   ________   ________   &tog CMK
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 		//│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-		  &bootloader  ________   ________   ________  &bt BT(1)       ________   ________   ________   ________  &bootloader
+		  &bootloader  ________   ________   ________  &bt BT(1)     &out OUT_USB ________   ________   ________  &bootloader
 		//├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
 		//│ SLEEP    │          │          │CLEAR PROF│PROFILE 2 │   │          │          │          │          │ SSAVE    │
 			Z_SLEEP    ________   ________  &bt BT_CLR &bt BT(2)       ________   ________   ________   ________   Z_SSAVE
