@@ -142,8 +142,12 @@ name: name##_macro {                  \
 #define ________ &trans
 
 #define BT(n) BT_SEL n
-#define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
-#define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
+// SACG
+// #define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
+// #define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
+// CAGS
+#define HRML(k1,k2,k3,k4) &lht LCTRL k1  &lht LALT k2  &lht LGUI k3  &lht LSHFT k4
+#define HRMR(k1,k2,k3,k4) &rht RSHFT k1  &rht RGUI k2  &rht RALT k3  &rht RCTRL k4
 #define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C) k2  &ht LG(X) k3  &ht LG(Z) k4
 
 / {
