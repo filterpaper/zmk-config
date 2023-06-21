@@ -140,15 +140,16 @@ name: name##_macro {                  \
 #define NAV_UP   &kp LS(LA(UARW))
 #define NAV_DN   &kp LS(LA(DARW))
 #define ________ &trans
+#define BT(n)    BT_SEL n
 
-#define BT(n) BT_SEL n
-// SACG
-// #define HRML(k1,k2,k3,k4) &lht LSHFT k1  &lht LALT k2  &lht LCTRL k3  &lht LGUI k4
-// #define HRMR(k1,k2,k3,k4) &rht RGUI k1  &rht RCTRL k2  &rht RALT k3  &rht RSHFT k4
-// CAGS
 #define HRML(k1,k2,k3,k4) &lht LCTRL k1  &lht LALT k2  &lht LGUI k3  &lht LSHFT k4
 #define HRMR(k1,k2,k3,k4) &rht RSHFT k1  &rht RGUI k2  &rht RALT k3  &rht RCTRL k4
-#define HT(k1,k2,k3,k4) &ht LG(V) k1  &ht LG(C) k2  &ht LG(X) k3  &ht LG(Z) k4
+#define HT(k1,k2,k3,k4)   &ht LG(V) k1  &ht LG(C) k2  &ht LG(X) k3  &ht LG(Z) k4
+
+#define SYM_TAB  &lt SYM TAB
+#define LCA_ENT  &mt LC(LALT) ENTER
+#define SFT_SPC  &ht RSHFT SPACE
+#define NUM_BSP  &lt NUM BSPC
 
 / {
     keymap {
@@ -165,7 +166,7 @@ name: name##_macro {                  \
         //│  Z       │  X       │  C       │  V       │  B       │   │  N       │  M       │ , <      │ . >      │ / ?      │
             &kp Z      &kp X      &kp C      &kp V      &kp B          &kp N       HT(M,      COMMA,       DOT,      FSLH)
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                  &lt SYM TAB  &mt LC(LALT) ENTER     &ht RSHFT SPACE  &lt NUM BSPC
+                                             SYM_TAB    LCA_ENT        SFT_SPC    NUM_BSP
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
