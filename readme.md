@@ -1,15 +1,95 @@
 # Summary
-Personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic))
+This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic)). It has a few simple macros to manage the keymap file and custom hold-tap configuration to make home row modifiers easier to use.
+
+&nbsp;</br> &nbsp;</br>
+
+# Contextual Hold-Taps
+ZMK's interrupt based input detection offers a large number of configuration options for managing hold or tap keys. These are my contextual configuration setup for ease of triggering while avoiding false positives.
+
+## Thumb keys
+Layer-tap keys are shared with Tab and Backspace, and they are typically not "rolled" with other overlapping key presses. The `&lt` binding is modified with the `hold-preferred` flavor for quick layer activation
+```c
+&lt {
+    flavor = "hold-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+};
+```
+The Ctrl+Alt mod-tap key with Enter is configured with the `balanced` flavor to allow intentional trigger of both modifiers with another overlapping key press. The `&mt` binding is changed to the following:
+```c
+&mt {
+    flavor = "balanced";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+};
+```
+Lastly, a hold-tap behavior is setup for Shift with Enter thumb key and clipboard shortcuts. These keys are subjected to frequent overlap with other keys, so the `tap-preferred` flavor is used to ensure that taps are triggered even if they are pressed together with other keys, and to avoid false positives.
+```c
+ht: hold_tap {
+    label = "hold_tap";
+    compatible = "zmk,behavior-hold-tap";
+    flavor = "tap-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+};
+```
+
+## Home row non-Shift mods
+Modifiers should not be triggered when a mod-tap key is pressed together with another key on the same hand. However, they should be triggered when held down and another key is tapped with the opposite hand. This is accomplished using `tap-preferred` flavor with the following positional hold-tap behavior (mirrored for the right side):
+```c
+lmt: left_mod_tap {
+    label = "left_mod_tap";
+    compatible = "zmk,behavior-hold-tap";
+    flavor = "tap-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+    global-quick-tap;
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <
+                     5  6  7  8  9
+                    15 16 17 18 19
+                    25 26 27 28 29
+             30 31  32 33
+    >;
+};
+```
+A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions` list. If it overlaps with a key index **listed in** the `hold-trigger-key-positions` list, the mod-tap behavior will be as defined.
+
+The `global-quick-tap` setting is also defined to disable the hold function while typing quickly.
+
+## Home row Shift
+The home row mod-tap Shift key is configured differently than the other modifiers. It is set with the `balanced` flavor, but only for keys on the opposite hand using `hold-trigger-key-positions`. The `global-quick-tap` feature is excluded to avoid Shift from being deactivated while typing quickly. They are configured with the following binding (also mirrored for the right side):
+```c
+lst: left_shift_tap {
+    label = "left_shift_tap";
+    compatible = "zmk,behavior-hold-tap";
+    flavor = "balanced";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms = <QUICK_TAP>;
+    #binding-cells = <2>;
+    bindings = <&kp>, <&kp>;
+    hold-trigger-key-positions = <
+                     5  6  7  8  9
+                    15 16 17 18 19
+                    25 26 27 28 29
+    >;
+};
+```
+
+&nbsp;</br> &nbsp;</br>
 
 # Preprocessor Macros
-## Home Row Mods
-Shortern [home row mods](https://precondition.github.io/home-row-mods) on the keymap:
+## Home row mod-taps
+A wrapper macro is used to apply the aforementioned home row mod-taps to the keymap in a way that makes them easier to read:
 ```c
-#define HRML(k1,k2,k3,k4) &mt LSHFT k1  &ht LALT k2  &ht LCTRL k3  &ht LGUI k4
-#define HRMR(k1,k2,k3,k4) &ht RGUI k1  &ht RCTRL k2  &ht RALT k3  &mt RSHFT k4
+#define HRML(k1,k2,k3,k4) &lmt LCTRL k1  &lmt LALT k2  &lmt LGUI k3  &lst LSHFT k4
+#define HRMR(k1,k2,k3,k4) &rst RSHFT k1  &rmt RGUI k2  &rmt RALT k3  &rmt RCTRL k4
 ```
 ## Combos
-Simplify combos into one-liners:
+Combos are simplified into one-liners using the following code:
 ```c
 #define COMBO(name, keypress, keypos) \
     combo_##name {                    \
@@ -22,20 +102,22 @@ Simplify combos into one-liners:
 COMBO(name, bindings, key positions)
 ```
 ## Macros
-Shortcut for simple key press macros:
+Macros are also simplified into one-liners using the following code:
 ```c
 #define MACRO(name, keys)                  \
     name: name##_macro {                   \
         label = #name;                     \
         compatible = "zmk,behavior-macro"; \
-        #binding-cells = <0>;              \
         wait-ms = <1>;                     \
         tap-ms = <1>;                      \
+        #binding-cells = <0>;              \
         bindings = <keys>;                 \
     };
 
 MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
 ```
+
+&nbsp;</br> &nbsp;</br>
 
 # Useful Links
 * nice!nano v2 [Pinout](https://nicekeyboards.com/docs/nice-nano/pinout-schematic/)
@@ -43,6 +125,7 @@ MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
 * [Hypergolic](https://github.com/davidphilipbarr/hypergolic) PCBs
 * [Sockets](https://github.com/joric/nrfmicro/wiki/Sockets)
 * [Keymapviz](https://github.com/yskoht/keymapviz)
+* [Keymap Drawer](https://github.com/caksoylar/keymap-drawer)
 ## Hardware Parts
 * Machined [header sockets](https://www.aliexpress.com/item/32852480645.html)
 * Mill-Max [315-43-164-41-001000](https://www.digikey.com/en/products/detail/mill-max-manufacturing-corp/315-43-164-41-001000/1212142) sockets
