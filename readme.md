@@ -1,53 +1,90 @@
 # Summary
-This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic)). It has a few simple macros to manage the keymap file and custom hold-tap configuration to make home row modifiers easier to use.
+This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic)). It uses contextual hold-tap configuration to make home row modifiers easier to use, along with simple macros to manage the keymap.
 
 &nbsp;</br> &nbsp;</br>
 
 # Contextual Hold-Taps
-ZMK's interrupt based input detection offers a large number of configuration options for managing hold or tap keys. These are my contextual configuration setup for ease of triggering while avoiding false positives.
+ZMK's interrupt based input detection offers a large number of configuration options for managing hold or tap keys. These are my contextual configuration setup for ease of triggering modifiers while avoiding false positives.
 
 ## Thumb keys
-Layer-tap keys are shared with Tab and Backspace, and they are typically not "rolled" with other overlapping key presses. The `&lt` binding is modified with the `hold-preferred` flavor for quick layer activation
+Layer-tap keys are shared with Tab and Backspace, and they are typically not "rolled" with other overlapping key presses. The `&lt` binding is modified with the `hold-preferred` flavor for quicker layer activation
 ```c
 &lt {
-    flavor = "hold-preferred";
+    flavor          = "hold-preferred";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms = <QUICK_TAP>;
+    quick-tap-ms    = <QUICK_TAP>;
 };
 ```
 The Ctrl+Alt mod-tap key with Enter is configured with the `balanced` flavor to allow intentional trigger of both modifiers with another overlapping key press. The `&mt` binding is changed to the following:
 ```c
 &mt {
-    flavor = "balanced";
+    flavor          = "balanced";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms = <QUICK_TAP>;
+    quick-tap-ms    = <QUICK_TAP>;
 };
 ```
-Lastly, a hold-tap behavior is setup for Shift with Enter thumb key and clipboard shortcuts. These keys are subjected to frequent overlap with other keys, so the `tap-preferred` flavor is used to ensure that taps are triggered even if they are pressed together with other keys, and to avoid false positives.
+Lastly, a hold-tap behavior is setup for Shift with Space thumb key and clipboard shortcuts. These keys are subjected to frequent overlap with other keys, so the `tap-preferred` flavor is used to ensure that taps are triggered even if they are pressed together with other keys to avoid false positives.
 ```c
 ht: hold_tap {
-    label = "hold_tap";
-    compatible = "zmk,behavior-hold-tap";
-    flavor = "tap-preferred";
+    label           = "hold_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "tap-preferred";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms = <QUICK_TAP>;
-    #binding-cells = <2>;
-    bindings = <&kp>, <&kp>;
+    quick-tap-ms    = <QUICK_TAP>;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
 };
 ```
 
-## Home row non-Shift mods
-Modifiers should not be triggered when a mod-tap key is pressed together with another key on the same hand. However, they should be triggered when held down and another key is tapped with the opposite hand. This is accomplished using `tap-preferred` flavor with the following positional hold-tap behavior (mirrored for the right side):
+## Home row non-Shift modifiers
+Modifiers should not be triggered when a mod-tap key is pressed together with another key on the *same hand*. However, they should be triggered when held down and another key is tapped with the *opposite hand*. This is accomplished using `tap-preferred` flavor with the following positional hold-tap behavior (mirrored for the right side):
 ```c
 lmt: left_mod_tap {
-    label = "left_mod_tap";
-    compatible = "zmk,behavior-hold-tap";
-    flavor = "tap-preferred";
+    label           = "left_mod_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "tap-preferred";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms = <QUICK_TAP>;
+    quick-tap-ms    = <QUICK_TAP>;
     global-quick-tap;
-    #binding-cells = <2>;
-    bindings = <&kp>, <&kp>;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
+    hold-trigger-key-positions = <
+                     5  6  7  8  9
+             13     15 16 17 18 19
+                    25 26 27 28 29
+             30 31  32 33
+    >;
+};
+rmt: right_mod_tap {
+    label           = "right_mod_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "tap-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms    = <QUICK_TAP>;
+    global-quick-tap;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
+    hold-trigger-key-positions = <
+     0  1  2  3  4
+    10 11 12 13 14     16
+    17 21 22 23 24
+             30 31  32 33
+    >;
+};
+```
+A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions`. If it overlaps with a key index **listed in** the `hold-trigger-key-positions`, the mod-tap behavior will be as defined. Two home row mod positions on the same side is included to allow chording of frequently used modifiers. The `global-quick-tap` setting is also defined to disable the hold function while typing quickly.
+
+## Home row Shift
+The home row mod-tap Shift key is configured differently than the other modifiers. It is set with the `balanced` flavor, but only for keys on the opposite hand using `hold-trigger-key-positions`. The `global-quick-tap` feature is excluded to avoid Shift from being deactivated while typing quickly. They are configured with the following binding (also mirrored for the right side):
+```c
+lst: left_shift_tap {
+    label           = "left_shift_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "balanced";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms    = <QUICK_TAP>;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
     hold-trigger-key-positions = <
                      5  6  7  8  9
                     15 16 17 18 19
@@ -55,26 +92,19 @@ lmt: left_mod_tap {
              30 31  32 33
     >;
 };
-```
-A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions` list. If it overlaps with a key index **listed in** the `hold-trigger-key-positions` list, the mod-tap behavior will be as defined.
-
-The `global-quick-tap` setting is also defined to disable the hold function while typing quickly.
-
-## Home row Shift
-The home row mod-tap Shift key is configured differently than the other modifiers. It is set with the `balanced` flavor, but only for keys on the opposite hand using `hold-trigger-key-positions`. The `global-quick-tap` feature is excluded to avoid Shift from being deactivated while typing quickly. They are configured with the following binding (also mirrored for the right side):
-```c
-lst: left_shift_tap {
-    label = "left_shift_tap";
-    compatible = "zmk,behavior-hold-tap";
-    flavor = "balanced";
+rst: right_shift_tap {
+    label           = "right_shift_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "balanced";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms = <QUICK_TAP>;
-    #binding-cells = <2>;
-    bindings = <&kp>, <&kp>;
+    quick-tap-ms    = <QUICK_TAP>;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
     hold-trigger-key-positions = <
-                     5  6  7  8  9
-                    15 16 17 18 19
-                    25 26 27 28 29
+     0  1  2  3  4
+    10 11 12 13 14
+    20 21 22 23 24
+             30 31  32 33
     >;
 };
 ```
