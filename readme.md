@@ -6,36 +6,6 @@ This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 
 # Contextual Hold-Taps
 ZMK's interrupt based input detection offers a large number of configuration options for managing hold or tap keys. These are my contextual configuration setup for ease of triggering modifiers while avoiding false positives.
 
-## Thumb keys
-Layer-tap keys are shared with Tab and Backspace, and they are typically not "rolled" with other overlapping key presses. The `&lt` binding is modified with the `hold-preferred` flavor for quicker layer activation
-```c
-&lt {
-    flavor          = "hold-preferred";
-    tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP>;
-};
-```
-The Ctrl+Alt mod-tap key with Enter is configured with the `balanced` flavor to allow intentional trigger of both modifiers with another overlapping key press. The `&mt` binding is changed to the following:
-```c
-&mt {
-    flavor          = "balanced";
-    tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP>;
-};
-```
-Lastly, a hold-tap behavior is setup for Shift with Space thumb key and clipboard shortcuts. These keys are subjected to frequent overlap with other keys, so the `tap-preferred` flavor is used to ensure that taps are triggered even if they are pressed together with other keys to avoid false positives.
-```c
-ht: hold_tap {
-    label           = "hold_tap";
-    compatible      = "zmk,behavior-hold-tap";
-    flavor          = "tap-preferred";
-    tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP>;
-    #binding-cells  = <2>;
-    bindings        = <&kp>, <&kp>;
-};
-```
-
 ## Home row non-Shift modifiers
 Modifiers should not be triggered when a mod-tap key is pressed together with another key on the *same hand*. However, they should be triggered when held down and another key is tapped with the *opposite hand*. This is accomplished using `tap-preferred` flavor with the following positional hold-tap behavior (mirrored for the right side):
 ```c
@@ -106,6 +76,36 @@ rst: right_shift_tap {
     20 21 22 23 24
              30 31  32 33
     >;
+};
+```
+
+## Thumb keys
+Layer-tap keys are shared with Tab and Backspace, and they are typically not "rolled" with other overlapping key presses. The `&lt` binding is modified with the `hold-preferred` flavor for quicker layer activation
+```c
+&lt {
+    flavor          = "hold-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms    = <QUICK_TAP>;
+};
+```
+The Ctrl+Alt mod-tap key with Enter is configured with the `balanced` flavor to allow intentional trigger of both modifiers with another overlapping key press. The `&mt` binding is changed to the following:
+```c
+&mt {
+    flavor          = "balanced";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms    = <QUICK_TAP>;
+};
+```
+Lastly, a hold-tap behavior is setup for Shift with Space thumb key and clipboard shortcuts. These keys are subjected to frequent overlap with other keys, so the `tap-preferred` flavor is used to ensure that taps are triggered even if they are pressed together with other keys to avoid false positives.
+```c
+ht: hold_tap {
+    label           = "hold_tap";
+    compatible      = "zmk,behavior-hold-tap";
+    flavor          = "tap-preferred";
+    tapping-term-ms = <TAPPING_TERM>;
+    quick-tap-ms    = <QUICK_TAP>;
+    #binding-cells  = <2>;
+    bindings        = <&kp>, <&kp>;
 };
 ```
 
