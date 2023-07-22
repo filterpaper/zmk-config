@@ -1,6 +1,8 @@
 # Summary
 This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 34-key Cradio ([Hypergolic](https://github.com/davidphilipbarr/hypergolic)). It uses contextual hold-tap configuration to make home row modifiers easier to use, along with simple macros to manage the keymap.
 
+![kb](https://github.com/filterpaper/filterpaper.github.io/raw/main/images/nice_cradio.png)
+
 &nbsp;</br> &nbsp;</br>
 
 # Contextual Hold-Taps
