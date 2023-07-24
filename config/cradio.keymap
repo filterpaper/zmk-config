@@ -1,4 +1,4 @@
-// Copyright 2022 @filterpaper
+// Copyright @filterpaper
 // SPDX-License-Identifier: MIT
 
 #include <behaviors.dtsi>
@@ -178,10 +178,10 @@ name: name##_macro {                      \
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ INSERT   │  1       │  2       │  3       │ VOL UP   │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
-            &kp INS    &kp N1     &kp N2     &kp N3    &kp C_VOL_UP   &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
+            &kp INS    &kp N1     &kp N2     &kp N3    &kp C_VOL_UP    &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ DELETE   │  4       │  5       │  6       │ VOL DN   │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-            &kp DEL    &kp N4     &kp N5     &kp N6    &kp C_VOL_DN   &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
+            &kp DEL    &kp N4     &kp N5     &kp N6    &kp C_VOL_DN    &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CAPS     │  7       │  8       │  9       │  0       │   │          │ SHFTA DN │ SHFTA UP │          │          │
            &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         ________   NAV_DN     NAV_UP     ________   ________
