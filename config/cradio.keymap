@@ -12,6 +12,7 @@
 #define FNC 4
 
 #define TAPPING_TERM 210
+#define SHIFT_TAP    170
 #define QUICK_TAP    150
 
 &lt {
@@ -32,12 +33,12 @@
 
 
 
-#define HOLD_TAP(name, hold_tap_flavor, ...)  \
+#define HOLD_TAP(name, tap_flavor, tap_term, ...) \
 name: name##_hold_tap {                       \
     label           = #name;                  \
-    flavor          = #hold_tap_flavor;       \
+    flavor          = #tap_flavor;            \
     compatible      = "zmk,behavior-hold-tap";\
-    tapping-term-ms = <TAPPING_TERM>;         \
+    tapping-term-ms = <tap_term>;             \
     quick-tap-ms    = <QUICK_TAP>;            \
     #binding-cells  = <2>;                    \
     bindings        = <&kp>, <&kp>;           \
@@ -58,23 +59,23 @@ name: name##_hold_tap {                       \
             #binding-cells = <0>;
             bindings       = <&kp ESC>, <&kp GRAVE>;
         };
-        HOLD_TAP(ht, tap-preferred)
+        HOLD_TAP(ht, tap-preferred, TAPPING_TERM)
         // Positional hold-tap for non-Shift modifiers
-        HOLD_TAP(lmt, tap-preferred, global-quick-tap; hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
-        HOLD_TAP(rmt, tap-preferred, global-quick-tap; hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
+        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
+        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
         // Positional hold-tap for Shift
-        HOLD_TAP(lst, balanced, hold-trigger-key-positions = <R_KEYS>;)
-        HOLD_TAP(rst, balanced, hold-trigger-key-positions = <L_KEYS>;)
+        HOLD_TAP(lst, balanced, SHIFT_TAP, hold-trigger-key-positions = <R_KEYS>;)
+        HOLD_TAP(rst, balanced, SHIFT_TAP, hold-trigger-key-positions = <L_KEYS>;)
     };
 };
 
 
 
-#define COMBO(name, keypress, pos) \
-combo_##name {                     \
-    timeout-ms    = <30>;          \
-    bindings      = <keypress>;    \
-    key-positions = <pos>;         \
+#define COMBO(name, kp, pos) \
+combo_##name {               \
+    timeout-ms    = <30>;    \
+    bindings      = <kp>;    \
+    key-positions = <pos>;   \
 };
 /* Key positions
  0  1  2  3  4   5  6  7  8  9
