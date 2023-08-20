@@ -51,14 +51,6 @@ name: name##_hold_tap {                       \
 
 / {
     behaviors {
-        gresc: grave_escape {
-            label          = "grave_escape";
-            compatible     = "zmk,behavior-mod-morph";
-            mods           = <(MOD_LGUI|MOD_RGUI)>;
-            keep-mods      = <(MOD_RGUI)>;
-            #binding-cells = <0>;
-            bindings       = <&kp ESC>, <&kp GRAVE>;
-        };
         HOLD_TAP(ht, tap-preferred, TAPPING_TERM)
         // Positional hold-tap for non-Shift modifiers
         HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
@@ -187,7 +179,7 @@ name: name##_macro {                      \
         //│ CAPS     │  7       │  8       │  9       │  0       │   │          │ SHFTA DN │ SHFTA UP │          │          │
            &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         ________   NAV_DN     NAV_UP     ________   ________
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &mo FNC    &gresc         ________   ________
+                                             &mo FNC    &kp ESC        ________   ________
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
