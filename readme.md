@@ -11,13 +11,16 @@ ZMK's interrupt based input detection offers a large number of configuration opt
 ## Home row non-Shift modifiers
 Modifiers should not be triggered when a mod-tap key is pressed together with another key on the *same hand*. However, they should be triggered when held down and another key is tapped with the *opposite hand*. This is accomplished using `tap-preferred` flavor with the following positional hold-tap behavior (mirrored for the right side):
 ```c
+#define TAPPING_TERM 210
+#define SHIFT_TAP    170
+#define QUICK_TAP    105
+
 lmt: left_mod_tap {
     label           = "left_mod_tap";
     compatible      = "zmk,behavior-hold-tap";
     flavor          = "tap-preferred";
     tapping-term-ms = <TAPPING_TERM>;
     quick-tap-ms    = <QUICK_TAP>;
-    global-quick-tap;
     #binding-cells  = <2>;
     bindings        = <&kp>, <&kp>;
     hold-trigger-key-positions = <
@@ -33,7 +36,6 @@ rmt: right_mod_tap {
     flavor          = "tap-preferred";
     tapping-term-ms = <TAPPING_TERM>;
     quick-tap-ms    = <QUICK_TAP>;
-    global-quick-tap;
     #binding-cells  = <2>;
     bindings        = <&kp>, <&kp>;
     hold-trigger-key-positions = <
@@ -44,16 +46,16 @@ rmt: right_mod_tap {
     >;
 };
 ```
-A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions`. If it overlaps with a key index **listed in** the `hold-trigger-key-positions`, the mod-tap behavior will be as defined. Two home row mod positions on the same side is included to allow chording of frequently used modifiers. The `global-quick-tap` setting is also defined to disable the hold function while typing quickly.
+A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions`. If it overlaps with a key index **listed in** the `hold-trigger-key-positions`, the mod-tap behavior will be as defined. Two home row mod positions on the same side is included to allow chording of frequently used modifiers.
 
 ## Home row Shift
-The home row mod-tap Shift key is configured differently than the other modifiers. It is set with the `balanced` flavor, but only for keys on the opposite hand using `hold-trigger-key-positions`. The `global-quick-tap` feature is excluded to avoid Shift from being deactivated while typing quickly. They are configured with the following binding (also mirrored for the right side):
+The home row mod-tap Shift key is setup differently than the other modifiers. It is configured with a shorter tapping term and uses the `balanced` flavor, but only for keys on the opposite hand using `hold-trigger-key-positions`. They are defined with the following binding (also mirrored for the right side):
 ```c
 lst: left_shift_tap {
     label           = "left_shift_tap";
     compatible      = "zmk,behavior-hold-tap";
     flavor          = "balanced";
-    tapping-term-ms = <TAPPING_TERM>;
+    tapping-term-ms = <SHIFT_TAP>;
     quick-tap-ms    = <QUICK_TAP>;
     #binding-cells  = <2>;
     bindings        = <&kp>, <&kp>;
@@ -68,7 +70,7 @@ rst: right_shift_tap {
     label           = "right_shift_tap";
     compatible      = "zmk,behavior-hold-tap";
     flavor          = "balanced";
-    tapping-term-ms = <TAPPING_TERM>;
+    tapping-term-ms = <SHIFT_TAP>;
     quick-tap-ms    = <QUICK_TAP>;
     #binding-cells  = <2>;
     bindings        = <&kp>, <&kp>;
@@ -120,6 +122,35 @@ A wrapper macro is used to apply the aforementioned home row mod-taps to the key
 #define HRML(k1,k2,k3,k4) &lmt LCTRL k1  &lmt LALT k2  &lmt LGUI k3  &lst LSHFT k4
 #define HRMR(k1,k2,k3,k4) &rst RSHFT k1  &rmt RGUI k2  &rmt RALT k3  &rmt RCTRL k4
 ```
+The following hold tap macro reduces the number of lines in the `behavior` code block:
+```c
+#define HOLD_TAP(name, tap_flavor, tap_term, ...) \
+name: name##_hold_tap {                       \
+    label           = #name;                  \
+    flavor          = #tap_flavor;            \
+    compatible      = "zmk,behavior-hold-tap";\
+    tapping-term-ms = <tap_term>;             \
+    quick-tap-ms    = <QUICK_TAP>;            \
+    #binding-cells  = <2>;                    \
+    bindings        = <&kp>, <&kp>;           \
+    __VA_ARGS__                               \
+};
+#define L_SHIFT 13
+#define R_SHIFT 16
+#define L_KEYS 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 30 31 32 33
+#define R_KEYS 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 30 31 32 33
+
+/ {
+    behaviors {
+        // Positional hold-tap for non-Shift modifiers
+        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
+        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
+        // Positional hold-tap for Shift
+        HOLD_TAP(lst, balanced, SHIFT_TAP, hold-trigger-key-positions = <R_KEYS>;)
+        HOLD_TAP(rst, balanced, SHIFT_TAP, hold-trigger-key-positions = <L_KEYS>;)
+    };
+};
+```
 ## Combos
 Combos are simplified into one-liners using the following code:
 ```c
@@ -131,7 +162,12 @@ Combos are simplified into one-liners using the following code:
         key-positions = <keypos>;     \
     };
 
-COMBO(name, bindings, key positions)
+/ {
+    combos {
+        compatible = "zmk,combos";
+        COMBO(caps_w, &caps_word,   13 16)
+    };
+};
 ```
 ## Macros
 Macros are also simplified into one-liners using the following code:
@@ -146,7 +182,11 @@ Macros are also simplified into one-liners using the following code:
         bindings = <keys>;                 \
     };
 
-MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
+/ {
+    macros {
+        MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
+    };
+};
 ```
 
 &nbsp;</br> &nbsp;</br>

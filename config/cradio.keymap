@@ -13,7 +13,7 @@
 
 #define TAPPING_TERM 210
 #define SHIFT_TAP    170
-#define QUICK_TAP    150
+#define QUICK_TAP    110
 
 &lt {
     flavor          = "hold-preferred";
