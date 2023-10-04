@@ -12,19 +12,19 @@
 #define FNC 4
 
 #define TAPPING_TERM 210
-#define SHIFT_TAP    170
-#define QUICK_TAP    110
+#define SHIFT_TAP_MS 170
+#define QUICK_TAP_MS 110
 
 &lt {
     flavor          = "hold-preferred";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP>;
+    quick-tap-ms    = <QUICK_TAP_MS>;
 };
 
 &mt {
     flavor          = "balanced";
     tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP>;
+    quick-tap-ms    = <QUICK_TAP_MS>;
 };
 
 &caps_word {
@@ -39,7 +39,7 @@ name: name##_hold_tap {                       \
     flavor          = #tap_flavor;            \
     compatible      = "zmk,behavior-hold-tap";\
     tapping-term-ms = <tap_term>;             \
-    quick-tap-ms    = <QUICK_TAP>;            \
+    quick-tap-ms    = <QUICK_TAP_MS>;         \
     #binding-cells  = <2>;                    \
     bindings        = <&kp>, <&kp>;           \
     __VA_ARGS__                               \
@@ -56,8 +56,8 @@ name: name##_hold_tap {                       \
         HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
         HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
         // Positional hold-tap for Shift
-        HOLD_TAP(lst, balanced, SHIFT_TAP, hold-trigger-key-positions = <R_KEYS>;)
-        HOLD_TAP(rst, balanced, SHIFT_TAP, hold-trigger-key-positions = <L_KEYS>;)
+        HOLD_TAP(lst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <R_KEYS>;)
+        HOLD_TAP(rst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <L_KEYS>;)
     };
 };
 
