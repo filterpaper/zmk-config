@@ -86,8 +86,12 @@ combo_##name {               \
         COMBO(vim_s,  &vim_s,  20 21)
         COMBO(dir_up, &dir_up, 28 29)
         // navigation
-        COMBO(nav_dn, &kp LS(LA(DARW)), 26 27)
+        COMBO(arr_up, &kp UARW,  6  7)
+        COMBO(arr_dn, &kp DARW, 16 17)
+        COMBO(arr_lt, &kp LARW, 15 16)
+        COMBO(arr_rt, &kp RARW, 17 18)
         COMBO(nav_up, &kp LS(LA(UARW)), 27 28)
+        COMBO(nav_dn, &kp LS(LA(DARW)), 26 27)
         // noop thumbs
         COMBO(thmb_l, &none, 30 31)
         COMBO(thmb_r, &none, 32 33)
