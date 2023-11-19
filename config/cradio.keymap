@@ -12,7 +12,7 @@
 #define FNC 4
 
 #define TAPPING_TERM 210
-#define SHIFT_TAP_MS 170
+#define SHIFT_TAP_MS 180
 #define QUICK_TAP_MS 110
 
 &lt {
@@ -52,6 +52,7 @@ name: name##_hold_tap {                       \
 / {
     behaviors {
         HOLD_TAP(ht, tap-preferred, TAPPING_TERM)
+        HOLD_TAP(st, tap-preferred, SHIFT_TAP_MS)
         // Positional hold-tap for non-Shift modifiers
         HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
         HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
@@ -133,7 +134,7 @@ name: name##_macro {                      \
 
 #define SYM_TAB  &lt SYM TAB
 #define LCA_ENT  &mt LC(LALT) ENTER
-#define SFT_SPC  &ht RSHFT SPACE
+#define SFT_SPC  &st RSHFT SPACE
 #define NUM_BSP  &lt NUM BSPC
 
 / {
