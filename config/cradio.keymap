@@ -13,7 +13,7 @@
 
 #define TAPPING_TERM 210
 #define SHIFT_TAP_MS 180
-#define QUICK_TAP_MS 110
+#define QUICK_TAP_MS 150
 
 &lt {
     flavor          = "hold-preferred";
@@ -54,8 +54,8 @@ name: name##_hold_tap {                       \
         HOLD_TAP(ht, tap-preferred, TAPPING_TERM)
         HOLD_TAP(st, tap-preferred, SHIFT_TAP_MS)
         // Positional hold-tap for non-Shift modifiers
-        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
-        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
+        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
+        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
         // Positional hold-tap for Shift
         HOLD_TAP(lst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <R_KEYS>;)
         HOLD_TAP(rst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <L_KEYS>;)
