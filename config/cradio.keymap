@@ -51,8 +51,8 @@ name: name##_hold_tap {                       \
 
 / {
     behaviors {
-        HOLD_TAP(ht, tap-preferred, TAPPING_TERM)
         HOLD_TAP(st, tap-preferred, SHIFT_TAP_MS)
+        HOLD_TAP(ht, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>;)
         // Positional hold-tap for non-Shift modifiers
         HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
         HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
@@ -180,7 +180,7 @@ name: name##_macro {                      \
             &kp INS    &kp N1     &kp N2     &kp N3    &kp C_VOL_UP    &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ DELETE   │  4       │  5       │  6       │ VOL DN   │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-            &kp DEL    &kp N4     &kp N5     &kp N6    &kp C_VOL_DN    &kp LARW   &kp DARW   &kp UARW   &kp RARW   &kp SEMI
+            &kp DEL    &kp N4     &kp N5     &kp N6    &kp C_VOL_DN    &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp SEMI
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ CAPS     │  7       │  8       │  9       │  0       │   │          │ SHFTA DN │ SHFTA UP │          │          │
            &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         ________   NAV_DN     NAV_UP     ________   ________
