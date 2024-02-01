@@ -13,21 +13,10 @@ jobs:
 
   release:
     needs: build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
-
-    steps:
-    - name: Download artifact
-      uses: actions/download-artifact@v3
-
-    - name: Publish release
-      uses: softprops/action-gh-release@master
-      with:
-        name: ZMK Firmware
-        tag_name: latest
-        draft: false
-        prerelease: false
-        files: "**/*.*"
+    uses: filterpaper/scripts/.github/workflows/publish-artifact.yml@main
+    with:
+      release_name: ZMK Firmware
+      release_tag: latest
 
   purge:
     if: github.event_name == 'schedule'
