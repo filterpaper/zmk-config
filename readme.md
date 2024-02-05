@@ -185,6 +185,7 @@ Macros are also simplified into one-liners using the following code:
 / {
     macros {
         MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
+        MACRO(bt_0,   &bt BT_DISC 1 &bt BT_SEL 0)
     };
 };
 ```

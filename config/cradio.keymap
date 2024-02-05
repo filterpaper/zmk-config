@@ -82,7 +82,6 @@ combo_##name {               \
         COMBO(numb,   &tog NUM,     25 26 33)
         COMBO(vol_up, &kp C_VOL_UP,  9 19)
         COMBO(vol_dn, &kp C_VOL_DN, 19 29)
-        COMBO(caps_w, &caps_word,   13 16)
         // invoke macros
         COMBO(vim_q,  &vim_q,   0  1)
         COMBO(vim_s,  &vim_s,  20 21)
@@ -117,6 +116,9 @@ name: name##_macro {                      \
         MACRO(vim_q,  &kp COLON &kp Q &kp EXCL)
         MACRO(vim_s,  &kp COLON &kp X)
         MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
+        MACRO(bt_0,   &bt BT_SEL 0 &bt BT_DISC 1)
+        MACRO(bt_1,   &bt BT_SEL 1 &bt BT_DISC 0)
+        MACRO(bt_2,   &bt BT_SEL 2 &bt BT_DISC 0)
     };
 };
 
@@ -127,7 +129,6 @@ name: name##_macro {                      \
 #define NAV_UP   &kp LS(LA(UARW))
 #define NAV_DN   &kp LS(LA(DARW))
 #define ________ &trans
-#define BT(n)    BT_SEL n
 
 #define HRML(k1,k2,k3,k4) &lmt LCTRL k1  &lmt LALT k2  &lmt LGUI k3  &lst LSHFT k4
 #define HRMR(k1,k2,k3,k4) &rst RSHFT k1  &rmt RGUI k2  &rmt RALT k3  &rmt RCTRL k4
@@ -179,11 +180,11 @@ name: name##_macro {                      \
         //│ INSERT   │  1       │  2       │  3       │ VOL UP   │   │ HOME     │ PAGE DN  │ PAGE UP  │ END      │  :       │
             &kp INS    &kp N1     &kp N2     &kp N3    &kp C_VOL_UP    &kp HOME   &kp PG_DN  &kp PG_UP  &kp END    &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ DELETE   │  4       │  5       │  6       │ VOL DN   │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
-            &kp DEL    &kp N4     &kp N5     &kp N6    &kp C_VOL_DN    &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp SEMI
+        //│ CAPS     │  4       │  5       │  6       │ VOL DN   │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
+           &caps_word  &kp N4     &kp N5     &kp N6    &kp C_VOL_DN    &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT  &kp SEMI
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ CAPS     │  7       │  8       │  9       │  0       │   │          │ SHFTA DN │ SHFTA UP │          │          │
-           &caps_word  &kp N7     &kp N8     &kp N9     &kp N0         ________   NAV_DN     NAV_UP     ________   ________
+        //│ DELETE   │  7       │  8       │  9       │  0       │   │          │ SHFTA DN │ SHFTA UP │          │          │
+            &kp DEL    &kp N7     &kp N8     &kp N9     &kp N0         ________   NAV_DN     NAV_UP     ________   ________
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &mo FNC    &kp ESC        ________   ________
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
@@ -209,13 +210,13 @@ name: name##_macro {                      \
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │ COLEMAK  │
-           &sys_reset  ________   ________   ________  &bt BT(0)     &out OUT_BLE ________   ________   ________   &tog CMK
+           &sys_reset  ________   ________   ________   &bt_0        &out OUT_BLE ________   ________   ________   &tog CMK
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-          &bootloader  ________   ________   ________  &bt BT(1)     &out OUT_USB ________   ________   ________  &bootloader
+          &bootloader  ________   ________   ________   &bt_1        &out OUT_USB ________   ________   ________  &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ SLEEP    │          │          │CLEAR PROF│PROFILE 2 │   │          │          │          │          │ SSAVE    │
-            Z_SLEEP    ________   ________  &bt BT_CLR &bt BT(2)       &kp GLOBE  ________   ________   ________   Z_SSAVE
+            Z_SLEEP    ________   ________  &bt BT_CLR  &bt_2         &kp GLOBE  ________   ________   ________   Z_SSAVE
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              ________   ________       ________   ________
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
