@@ -34,15 +34,15 @@
 
 
 #define HOLD_TAP(name, tap_flavor, tap_term, ...) \
-name: name##_hold_tap {                       \
-    label           = #name;                  \
-    flavor          = #tap_flavor;            \
-    compatible      = "zmk,behavior-hold-tap";\
-    tapping-term-ms = <tap_term>;             \
-    quick-tap-ms    = <QUICK_TAP_MS>;         \
-    #binding-cells  = <2>;                    \
-    bindings        = <&kp>, <&kp>;           \
-    __VA_ARGS__                               \
+name: name##_hold_tap {                           \
+    label           = #name;                      \
+    flavor          = #tap_flavor;                \
+    compatible      = "zmk,behavior-hold-tap";    \
+    tapping-term-ms = <tap_term>;                 \
+    quick-tap-ms    = <QUICK_TAP_MS>;             \
+    #binding-cells  = <2>;                        \
+    bindings        = <&kp>, <&kp>;               \
+    __VA_ARGS__                                   \
 };
 #define L_SHIFT 13
 #define R_SHIFT 16
@@ -64,12 +64,13 @@ name: name##_hold_tap {                       \
 
 
 
-#define COMBO(name, kp, pos) \
-combo_##name {               \
-    timeout-ms    = <30>;    \
-    bindings      = <kp>;    \
-    key-positions = <pos>;   \
-    layers        = <0 1>;   \
+#define COMBO(name, kp, pos)               \
+combo_##name {                             \
+    timeout-ms    = <30>;                  \
+    require-prior-idle-ms = <TAPPING_TERM>;\
+    bindings      = <kp>;                  \
+    key-positions = <pos>;                 \
+    layers        = <0 1>;                 \
 };
 /* Key positions
  0  1  2  3  4   5  6  7  8  9
