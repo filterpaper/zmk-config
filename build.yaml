@@ -3,5 +3,5 @@
 board:
 - nice_nano_v2
 shield:
-- hypergolic_left
-- hypergolic_right
+- cradio_left
+- cradio_right

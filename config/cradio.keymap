@@ -15,6 +15,29 @@
 #define SHIFT_TAP_MS 180
 #define QUICK_TAP_MS 150
 
+// Adjusted pin arrangement
+&kscan0 {
+    input-gpios
+    = <&pro_micro  6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 16 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  4 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    , <&pro_micro  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+    ;
+};
+
 &lt {
     flavor          = "hold-preferred";
     tapping-term-ms = <TAPPING_TERM>;
@@ -35,7 +58,6 @@
 
 #define HOLD_TAP(name, tap_flavor, tap_term, ...) \
 name: name##_hold_tap {                           \
-    label           = #name;                      \
     flavor          = #tap_flavor;                \
     compatible      = "zmk,behavior-hold-tap";    \
     tapping-term-ms = <tap_term>;                 \
@@ -104,7 +126,6 @@ combo_##name {                             \
 
 #define MACRO(name, keys)                 \
 name: name##_macro {                      \
-    label          = #name;               \
     compatible     = "zmk,behavior-macro";\
     tap-ms         = <1>;                 \
     wait-ms        = <1>;                 \
