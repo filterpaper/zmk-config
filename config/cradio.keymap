@@ -102,7 +102,6 @@ combo_##name {                             \
 / {
     combos {
         compatible = "zmk,combos";
-        COMBO(numb,   &tog NUM,     25 26 33)
         COMBO(vol_up, &kp C_VOL_UP,  9 19)
         COMBO(vol_dn, &kp C_VOL_DN, 19 29)
         // invoke macros
@@ -119,6 +118,10 @@ combo_##name {                             \
         // noop thumbs
         COMBO(thmb_l, &none, 30 31)
         COMBO(thmb_r, &none, 32 33)
+        // layer toggle
+        COMBO(numb,   &tog NUM,     25 26 33)
+        // delete word
+        COMBO(alt_bk, &kp LA(BSPC), 16 33)
     };
 };
 
