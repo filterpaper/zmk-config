@@ -6,15 +6,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#define CMK 1
-#define NUM 2
-#define SYM 3
-#define FNC 4
-
-#define TAPPING_TERM 210
-#define SHIFT_TAP_MS 180
-#define QUICK_TAP_MS 150
-
 // Adjusted pin arrangement
 &kscan0 {
     input-gpios
@@ -38,6 +29,18 @@
     ;
 };
 
+
+
+#define CMK 1
+#define NUM 2
+#define SYM 3
+#define FNC 4
+
+#define TAPPING_TERM 240
+#define SHIFT_TAP_MS 180
+#define QUICK_TAP_MS 150
+#define SHORTCUT_MS  270
+
 &lt {
     flavor          = "hold-preferred";
     tapping-term-ms = <TAPPING_TERM>;
@@ -45,7 +48,7 @@
 };
 
 &mt {
-    flavor          = "balanced";
+    flavor          = "tap-preferred";
     tapping-term-ms = <TAPPING_TERM>;
     quick-tap-ms    = <QUICK_TAP_MS>;
 };
@@ -56,15 +59,15 @@
 
 
 
-#define HOLD_TAP(name, tap_flavor, tap_term, ...) \
-name: name##_hold_tap {                           \
-    flavor          = #tap_flavor;                \
-    compatible      = "zmk,behavior-hold-tap";    \
-    tapping-term-ms = <tap_term>;                 \
-    quick-tap-ms    = <QUICK_TAP_MS>;             \
-    #binding-cells  = <2>;                        \
-    bindings        = <&kp>, <&kp>;               \
-    __VA_ARGS__                                   \
+#define HOLD_TAP(name, ht_flavor, ht_term, ...) \
+name: name##_hold_tap {                         \
+    flavor          = #ht_flavor;               \
+    compatible      = "zmk,behavior-hold-tap";  \
+    tapping-term-ms = <ht_term>;                \
+    quick-tap-ms    = <QUICK_TAP_MS>;           \
+    #binding-cells  = <2>;                      \
+    bindings        = <&kp>, <&kp>;             \
+    __VA_ARGS__                                 \
 };
 #define L_SHIFT 13
 #define R_SHIFT 16
@@ -73,14 +76,14 @@ name: name##_hold_tap {                           \
 
 / {
     behaviors {
-        HOLD_TAP(st, tap-preferred, SHIFT_TAP_MS)
-        HOLD_TAP(ht, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>;)
-        // Positional hold-tap for non-Shift modifiers
-        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <L_SHIFT R_KEYS>;)
-        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, require-prior-idle-ms = <150>; hold-trigger-key-positions = <R_SHIFT L_KEYS>;)
+        // Clipboard shortcuts
+        HOLD_TAP(ht, tap-preferred, SHORTCUT_MS, hold-trigger-key-positions = <33>;)
         // Positional hold-tap for Shift
         HOLD_TAP(lst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <R_KEYS>;)
         HOLD_TAP(rst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <L_KEYS>;)
+        // Positional hold-tap for non-Shift modifiers
+        HOLD_TAP(lmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
+        HOLD_TAP(rmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
     };
 };
 
@@ -88,11 +91,11 @@ name: name##_hold_tap {                           \
 
 #define COMBO(name, kp, pos)               \
 combo_##name {                             \
-    timeout-ms    = <30>;                  \
+    timeout-ms            = <30>;          \
     require-prior-idle-ms = <TAPPING_TERM>;\
-    bindings      = <kp>;                  \
-    key-positions = <pos>;                 \
-    layers        = <0 1>;                 \
+    bindings              = <kp>;          \
+    key-positions         = <pos>;         \
+    layers                = <0 1>;         \
 };
 /* Key positions
  0  1  2  3  4   5  6  7  8  9
@@ -102,24 +105,24 @@ combo_##name {                             \
 / {
     combos {
         compatible = "zmk,combos";
-        COMBO(vol_up, &kp C_VOL_UP,  9 19)
-        COMBO(vol_dn, &kp C_VOL_DN, 19 29)
         // invoke macros
         COMBO(vim_q,  &vim_q,   0  1)
         COMBO(vim_s,  &vim_s,  20 21)
         COMBO(dir_up, &dir_up, 28 29)
+        // media keys
+        COMBO(vol_up, &kp C_VOL_UP,  9 19)
+        COMBO(vol_dn, &kp C_VOL_DN, 19 29)
         // navigation
         COMBO(arr_up, &kp UARW,  6  7)
         COMBO(arr_dn, &kp DARW, 16 17)
         COMBO(arr_lt, &kp LARW, 15 16)
         COMBO(arr_rt, &kp RARW, 17 18)
-        COMBO(nav_up, &kp LS(LA(UARW)), 27 28)
-        COMBO(nav_dn, &kp LS(LA(DARW)), 26 27)
-        // noop thumbs
-        COMBO(thmb_l, &none, 30 31)
-        COMBO(thmb_r, &none, 32 33)
+        // shortcuts
+        COMBO(nav_up, &kp LS(LA(UARW)),  27 28)
+        COMBO(nav_dn, &kp LS(LA(DARW)),  26 27)
+        COMBO(sg_spc, &kp LS(LG(SPACE)), 22 23)
         // layer toggle
-        COMBO(numb,   &tog NUM,     25 26 33)
+        COMBO(numb,   &tog NUM, 25 26 33)
     };
 };
 
@@ -151,6 +154,7 @@ name: name##_macro {                      \
 #define Z_SSAVE  &kp LC(LA(LS(LG(S))))
 #define NAV_UP   &kp LS(LA(UARW))
 #define NAV_DN   &kp LS(LA(DARW))
+#define ALT_BSP  &kp LA(BSPC)
 #define ________ &trans
 
 #define HRML(k1,k2,k3,k4) &lmt LCTRL k1  &lmt LALT k2  &lmt LGUI k3  &lst LSHFT k4
@@ -159,9 +163,8 @@ name: name##_macro {                      \
 
 #define SYM_TAB  &lt SYM TAB
 #define LCA_ENT  &mt LC(LALT) ENTER
-#define SFT_SPC  &st RSHFT SPACE
+#define SFT_SPC  &mt RSHFT SPACE
 #define NUM_BSP  &lt NUM BSPC
-#define ALT_BSP  &kp LA(BSPC)
 
 / {
     keymap {
