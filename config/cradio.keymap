@@ -113,14 +113,16 @@ combo_##name {                             \
         COMBO(vol_up, &kp C_VOL_UP,  9 19)
         COMBO(vol_dn, &kp C_VOL_DN, 19 29)
         // navigation
-        COMBO(arr_up, &kp UARW,  6  7)
-        COMBO(arr_dn, &kp DARW, 16 17)
-        COMBO(arr_lt, &kp LARW, 15 16)
-        COMBO(arr_rt, &kp RARW, 17 18)
+        COMBO(arr_up, &kp UARW, 17 27)
+        COMBO(arr_dn, &kp DARW, 16 26)
+        COMBO(arr_lt, &kp LARW, 15 25)
+        COMBO(arr_rt, &kp RARW, 18 28)
+        COMBO(pageup, &kp PG_UP, 7 17)
+        COMBO(pagedn, &kp PG_DN, 6 16)
         // shortcuts
         COMBO(nav_up, &kp LS(LA(UARW)),  27 28)
         COMBO(nav_dn, &kp LS(LA(DARW)),  26 27)
-        COMBO(sg_spc, &kp LS(LG(SPACE)), 22 23)
+        COMBO(sg_spc, &kp LS(LG(SPACE)), 12 13)
         // layer toggle
         COMBO(numb,   &tog NUM, 25 26 33)
     };
