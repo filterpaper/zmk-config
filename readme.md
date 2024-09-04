@@ -8,22 +8,21 @@ This is my personal [ZMK](https://github.com/zmkfirmware/zmk) configuration for 
 # Contextual Hold-Taps
 ZMK's interrupt based input detection offers a large number of configuration options for managing hold or tap keys. These are my contextual configuration setup for ease of triggering modifiers while avoiding false positives.
 
-## Home row non-Shift modifiers
-Modifiers should not be triggered when a mod-tap key is pressed together with another key on the *same hand*. However, they should be triggered when held down and another key is tapped with the *opposite hand*. This is accomplished using `balanced` flavor with the following positional hold-tap behavior (mirrored for the right side):
+## Home Row Modifiers
+Modifiers should not be triggered when a mod-tap key is pressed together with another key on the *same hand*. However, they should be triggered when held down and another key is tapped with the *opposite hand*. This is accomplished using `balanced` flavor with the following positional hold-tap behavior for left and right mod-taps:
 ```c
 #define TAPPING_TERM 240
-#define SHIFT_TAP_MS 180
-#define QUICK_TAP_MS 160
+#define SHIFT_TAP_MS 170
+#define QUICK_TAP_MS 140
 
 lmt: left_mod_tap {
-    label           = "left_mod_tap";
-    compatible      = "zmk,behavior-hold-tap";
-    flavor          = "balanced";
-    tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP_MS>;
-    #binding-cells  = <2>;
-    bindings        = <&kp>, <&kp>;
-    require-prior-idle-ms = <QUICK_TAP_MS>;
+    compatible                 = "zmk,behavior-hold-tap";
+    #binding-cells             = <2>;
+    flavor                     = "preferred";
+    tapping-term-ms            = <TAPPING_TERM>;
+    quick-tap-ms               = <QUICK_TAP_MS>;
+    bindings                   = <&kp>, <&kp>;
+    require-prior-idle-ms      = <QUICK_TAP_MS>;
     hold-trigger-key-positions = <
                      5  6  7  8  9
              13     15 16 17 18 19
@@ -32,14 +31,13 @@ lmt: left_mod_tap {
     >;
 };
 rmt: right_mod_tap {
-    label           = "right_mod_tap";
-    compatible      = "zmk,behavior-hold-tap";
-    flavor          = "balanced";
-    tapping-term-ms = <TAPPING_TERM>;
-    quick-tap-ms    = <QUICK_TAP_MS>;
-    #binding-cells  = <2>;
-    bindings        = <&kp>, <&kp>;
-    require-prior-idle-ms = <QUICK_TAP_MS>;
+    compatible                 = "zmk,behavior-hold-tap";
+    #binding-cells             = <2>;
+    flavor                     = "preferred";
+    tapping-term-ms            = <TAPPING_TERM>;
+    quick-tap-ms               = <QUICK_TAP_MS>;
+    bindings                   = <&kp>, <&kp>;
+    require-prior-idle-ms      = <QUICK_TAP_MS>;
     hold-trigger-key-positions = <
      0  1  2  3  4
     10 11 12 13 14     16
@@ -48,19 +46,18 @@ rmt: right_mod_tap {
     >;
 };
 ```
-A mod-tap key will send its tap key code if it overlaps with another key index that is **not in** the `hold-trigger-key-positions`. If it overlaps with a key index **listed in** the `hold-trigger-key-positions`, the mod-tap behavior will be as defined. Two home row mod positions on the same side is included to allow chording with Shift. The `require-prior-idle-ms` feature is also enabled to prevent mods activation while typing.
+[Hold trigger keys](https://zmk.dev/docs/keymaps/behaviors/hold-tap#positional-hold-tap-and-hold-trigger-key-positions) are setup with positions on the opposite hand of each side for ease of activation. The `require-prior-idle-ms` feature is used to prevent unintended modifier activation during regular typing.
 
-## Home row Shift
-The home row mod-tap Shift key to the other modifiers, with a shorter tapping term and without require-prior-idle-ms` feature. They are defined with the following binding (also mirrored for the right side):
+## Home Row Shift
+The home row hold-tap Shift key is setup with a shorter tapping term, using `balanced` flavor and without `require-prior-idle-ms` for quicker capitalization while typing. They are defined with the following bindings:
 ```c
 lst: left_shift_tap {
-    label           = "left_shift_tap";
-    compatible      = "zmk,behavior-hold-tap";
-    flavor          = "balanced";
-    tapping-term-ms = <SHIFT_TAP_MS>;
-    quick-tap-ms    = <QUICK_TAP_MS>;
-    #binding-cells  = <2>;
-    bindings        = <&kp>, <&kp>;
+    compatible                 = "zmk,behavior-hold-tap";
+    #binding-cells             = <2>;
+    flavor                     = "balanced";
+    tapping-term-ms            = <SHIFT_TAP_MS>;
+    quick-tap-ms               = <QUICK_TAP_MS>;
+    bindings                   = <&kp>, <&kp>;
     hold-trigger-key-positions = <
                      5  6  7  8  9
                     15 16 17 18 19
@@ -69,13 +66,12 @@ lst: left_shift_tap {
     >;
 };
 rst: right_shift_tap {
-    label           = "right_shift_tap";
-    compatible      = "zmk,behavior-hold-tap";
-    flavor          = "balanced";
-    tapping-term-ms = <SHIFT_TAP_MS>;
-    quick-tap-ms    = <QUICK_TAP_MS>;
-    #binding-cells  = <2>;
-    bindings        = <&kp>, <&kp>;
+    compatible                 = "zmk,behavior-hold-tap";
+    #binding-cells             = <2>;
+    flavor                     = "balanced";
+    tapping-term-ms            = <SHIFT_TAP_MS>;
+    quick-tap-ms               = <QUICK_TAP_MS>;
+    bindings                   = <&kp>, <&kp>;
     hold-trigger-key-positions = <
      0  1  2  3  4
     10 11 12 13 14
@@ -88,23 +84,24 @@ rst: right_shift_tap {
 &nbsp;</br> &nbsp;</br>
 
 # Preprocessor Macros
-## Home row mod-taps
-A wrapper macro is used to apply the aforementioned home row mod-taps to the keymap in a way that makes them easier to read:
+Preprocessor macros can minimize code duplication, making it easier to update and modify behavior nodes over time.
+## Home Row Modifiers
+Repetitive hold-tap behavior nodes can be simplified to single-line macros that allows customization of home row mod-tap actions with the following definition:
 ```c
-#define HRML(k1,k2,k3,k4) &lmt LCTRL k1  &lmt LALT k2  &lmt LGUI k3  &lst LSHFT k4
-#define HRMR(k1,k2,k3,k4) &rst RSHFT k1  &rmt RGUI k2  &rmt RALT k3  &rmt RCTRL k4
-```
-The following hold tap macro reduces the number of lines in the `behavior` code block:
-```c
-#define HOLD_TAP(name, ht_flavor, ht_term, ...) \
-name: name##_hold_tap {                         \
-    flavor          = #ht_flavor;               \
-    compatible      = "zmk,behavior-hold-tap";  \
-    tapping-term-ms = <ht_term>;                \
-    quick-tap-ms    = <QUICK_TAP_MS>;           \
-    #binding-cells  = <2>;                      \
-    bindings        = <&kp>, <&kp>;             \
-    __VA_ARGS__                                 \
+#define HOLD_TAP(_name_,               \
+                 _flavor_,             \
+                 _tapping_term_,       \
+                 _require_prior_idle_, \
+                 _key_positions_)      \
+_name_: hold_tap_##_name_ {                               \
+    compatible                 = "zmk,behavior-hold-tap"; \
+    #binding-cells             = <2>;                     \
+    flavor                     = #_flavor_;               \
+    quick-tap-ms               = <QUICK_TAP_MS>;          \
+    tapping-term-ms            = <_tapping_term_>;        \
+    require-prior-idle-ms      = <_require_prior_idle_>;  \
+    hold-trigger-key-positions = <_key_positions_>;       \
+    bindings                   = <&kp>, <&kp>;            \
 };
 #define L_SHIFT 13
 #define R_SHIFT 16
@@ -113,25 +110,25 @@ name: name##_hold_tap {                         \
 
 / {
     behaviors {
-        // Positional hold-tap for Shift
-        HOLD_TAP(lst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <R_KEYS>;)
-        HOLD_TAP(rst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <L_KEYS>;)
         // Positional hold-tap for non-Shift modifiers
-        HOLD_TAP(lmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
-        HOLD_TAP(rmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
+        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, QUICK_TAP_MS, L_SHIFT R_KEYS)
+        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, QUICK_TAP_MS, R_SHIFT L_KEYS)
+        // Positional hold-tap for Shift
+        HOLD_TAP(lst, balanced, SHIFT_TAP_MS, 0, R_KEYS)
+        HOLD_TAP(rst, balanced, SHIFT_TAP_MS, 0, L_KEYS)
     };
 };
 ```
-## Combos
-Combos are simplified into one-liners using the following code:
+## Combos and Macros
+Both combos and macros are also simplified into one-liners using the following preprocessors:
 ```c
-#define COMBO(name, kp, pos)               \
-combo_##name {                             \
-    timeout-ms            = <30>;          \
-    require-prior-idle-ms = <TAPPING_TERM>;\
-    bindings              = <kp>;          \
-    key-positions         = <pos>;         \
-    layers                = <0 1>;         \
+#define COMBO(_name_, _bindings_, _key_positions_) \
+combo_##_name_ {                                   \
+    timeout-ms            = <30>;                  \
+    require-prior-idle-ms = <COMBO_IDLE_MS>;       \
+    bindings              = <_bindings_>;          \
+    key-positions         = <_key_positions_>;     \
+    layers                = <0 1>;                 \
 };
 
 / {
@@ -140,23 +137,21 @@ combo_##name {                             \
         COMBO(caps_w, &caps_word,   13 16)
     };
 };
-```
-## Macros
-Macros are also simplified into one-liners using the following code:
-```c
-#define MACRO(name, keys)                 \
-name: name##_macro {                      \
-    compatible     = "zmk,behavior-macro";\
-    tap-ms         = <1>;                 \
-    wait-ms        = <1>;                 \
-    #binding-cells = <0>;                 \
-    bindings       = <keys>;              \
+
+
+#define MACRO(_name_, _bindings_)          \
+_name_: macro_##_name_ {                   \
+    compatible     = "zmk,behavior-macro"; \
+    #binding-cells = <0>;                  \
+    tap-ms         = <1>;                  \
+    wait-ms        = <1>;                  \
+    bindings       = <_bindings_>;         \
 };
 
 / {
     macros {
         MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
-        MACRO(bt_0,   &bt BT_SEL 0 &bt BT_DISC 1)
+        MACRO(bt_0,   &out OUT_BLE &bt BT_SEL 0 &bt BT_DISC 1)
     };
 };
 ```
