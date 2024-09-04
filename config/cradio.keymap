@@ -36,21 +36,22 @@
 #define SYM 3
 #define FNC 4
 
-#define TAPPING_TERM 240
-#define SHIFT_TAP_MS 180
-#define QUICK_TAP_MS 150
-#define SHORTCUT_MS  270
+#define TAPPING_TERM  240
+#define QUICK_TAP_MS  140 // TAPPING_TERM - 100
+#define SHIFT_TAP_MS  190 // TAPPING_TERM - 50
+#define COMBO_IDLE_MS 340 // TAPPING_TERM + 100
+#define PRIOR_IDLE_MS 160 // TAPPING_TERM - 80
 
 &lt {
     flavor          = "hold-preferred";
-    tapping-term-ms = <TAPPING_TERM>;
     quick-tap-ms    = <QUICK_TAP_MS>;
+    tapping-term-ms = <TAPPING_TERM>;
 };
 
 &mt {
     flavor          = "tap-preferred";
-    tapping-term-ms = <TAPPING_TERM>;
     quick-tap-ms    = <QUICK_TAP_MS>;
+    tapping-term-ms = <TAPPING_TERM>;
 };
 
 &caps_word {
@@ -59,15 +60,20 @@
 
 
 
-#define HOLD_TAP(name, ht_flavor, ht_term, ...) \
-name: name##_hold_tap {                         \
-    flavor          = #ht_flavor;               \
-    compatible      = "zmk,behavior-hold-tap";  \
-    tapping-term-ms = <ht_term>;                \
-    quick-tap-ms    = <QUICK_TAP_MS>;           \
-    #binding-cells  = <2>;                      \
-    bindings        = <&kp>, <&kp>;             \
-    __VA_ARGS__                                 \
+#define HOLD_TAP(_name_,               \
+                 _flavor_,             \
+                 _tapping_term_,       \
+                 _require_prior_idle_, \
+                 _key_positions_)      \
+_name_: hold_tap_##_name_ {                               \
+    compatible                 = "zmk,behavior-hold-tap"; \
+    #binding-cells             = <2>;                     \
+    flavor                     = #_flavor_;               \
+    quick-tap-ms               = <QUICK_TAP_MS>;          \
+    tapping-term-ms            = <_tapping_term_>;        \
+    require-prior-idle-ms      = <_require_prior_idle_>;  \
+    hold-trigger-key-positions = <_key_positions_>;       \
+    bindings                   = <&kp>, <&kp>;            \
 };
 #define L_SHIFT 13
 #define R_SHIFT 16
@@ -77,25 +83,25 @@ name: name##_hold_tap {                         \
 / {
     behaviors {
         // Clipboard shortcuts
-        HOLD_TAP(ht, tap-preferred, SHORTCUT_MS, hold-trigger-key-positions = <33>;)
-        // Positional hold-tap for Shift
-        HOLD_TAP(lst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <R_KEYS>;)
-        HOLD_TAP(rst, balanced, SHIFT_TAP_MS, hold-trigger-key-positions = <L_KEYS>;)
+        HOLD_TAP(ht, tap-preferred, TAPPING_TERM, PRIOR_IDLE_MS, 33)
         // Positional hold-tap for non-Shift modifiers
-        HOLD_TAP(lmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <L_SHIFT R_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
-        HOLD_TAP(rmt, balanced, TAPPING_TERM, hold-trigger-key-positions = <R_SHIFT L_KEYS>; require-prior-idle-ms = <QUICK_TAP_MS>;)
+        HOLD_TAP(lmt, tap-preferred, TAPPING_TERM, PRIOR_IDLE_MS, L_SHIFT R_KEYS)
+        HOLD_TAP(rmt, tap-preferred, TAPPING_TERM, PRIOR_IDLE_MS, R_SHIFT L_KEYS)
+        // Positional hold-tap for Shift
+        HOLD_TAP(lst, balanced, SHIFT_TAP_MS, 0, R_KEYS)
+        HOLD_TAP(rst, balanced, SHIFT_TAP_MS, 0, L_KEYS)
     };
 };
 
 
 
-#define COMBO(name, kp, pos)               \
-combo_##name {                             \
-    timeout-ms            = <30>;          \
-    require-prior-idle-ms = <TAPPING_TERM>;\
-    bindings              = <kp>;          \
-    key-positions         = <pos>;         \
-    layers                = <0 1>;         \
+#define COMBO(_name_, _bindings_, _key_positions_) \
+combo_##_name_ {                                   \
+    timeout-ms            = <30>;                  \
+    require-prior-idle-ms = <COMBO_IDLE_MS>;       \
+    bindings              = <_bindings_>;          \
+    key-positions         = <_key_positions_>;     \
+    layers                = <0 1>;                 \
 };
 /* Key positions
  0  1  2  3  4   5  6  7  8  9
@@ -130,13 +136,13 @@ combo_##name {                             \
 
 
 
-#define MACRO(name, keys)                 \
-name: name##_macro {                      \
-    compatible     = "zmk,behavior-macro";\
-    tap-ms         = <1>;                 \
-    wait-ms        = <1>;                 \
-    #binding-cells = <0>;                 \
-    bindings       = <keys>;              \
+#define MACRO(_name_, _bindings_)          \
+_name_: macro_##_name_ {                   \
+    compatible     = "zmk,behavior-macro"; \
+    #binding-cells = <0>;                  \
+    tap-ms         = <1>;                  \
+    wait-ms        = <1>;                  \
+    bindings       = <_bindings_>;         \
 };
 
 / {
@@ -144,9 +150,9 @@ name: name##_macro {                      \
         MACRO(vim_q,  &kp COLON &kp Q &kp EXCL)
         MACRO(vim_s,  &kp COLON &kp X)
         MACRO(dir_up, &kp DOT &kp DOT &kp FSLH)
-        MACRO(bt_0,   &bt BT_SEL 0 &bt BT_DISC 1)
-        MACRO(bt_1,   &bt BT_SEL 1 &bt BT_DISC 0)
-        MACRO(bt_2,   &bt BT_SEL 2 &bt BT_DISC 0)
+        MACRO(bt_0,   &out OUT_BLE &bt BT_DISC 1 &bt BT_SEL 0)
+        MACRO(bt_1,   &out OUT_BLE &bt BT_DISC 0 &bt BT_SEL 1)
+        MACRO(bt_2,   &out OUT_BLE &bt BT_DISC 0 &bt BT_SEL 2)
     };
 };
 
@@ -231,7 +237,7 @@ name: name##_macro {                      \
         //│          │          │  <       │  >       │          │   │  &       │  _       │  +       │  │       │          │
             ________   ________   &kp LT     &kp GT     ________       &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   ________
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             ________   ________       ________   ________
+                                             ________   ________       ________   &none
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -245,7 +251,7 @@ name: name##_macro {                      \
           &bootloader  ________   ________   ________   &bt_1        &out OUT_USB ________   ________   ________  &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ SLEEP    │          │          │CLEAR PROF│PROFILE 2 │   │          │          │          │          │ SSAVE    │
-            Z_SLEEP    ________   ________  &bt BT_CLR  &bt_2         &kp GLOBE  ________   ________   ________   Z_SSAVE
+            Z_SLEEP    ________   ________  &bt BT_CLR  &bt_2         &kp GLOBE  ________   ________   ________    Z_SSAVE
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              ________   ________       ________   ________
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
