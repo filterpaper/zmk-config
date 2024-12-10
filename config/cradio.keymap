@@ -6,6 +6,10 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 3000
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 80
+#include <dt-bindings/zmk/pointing.h>
+
 // Adjusted pin arrangement
 &kscan0 {
     input-gpios
@@ -56,6 +60,18 @@
 
 &caps_word {
     continue-list = <UNDER MINUS BSPC LSHFT RSHFT LS(SPACE) RS(SPACE)>;
+};
+
+&mmv {
+    acceleration-exponent = <1>;
+    trigger-period-ms     = <8>;
+    time-to-max-speed-ms  = <500>;
+};
+
+&msc {
+    acceleration-exponent = <1>;
+    trigger-period-ms     = <8>;
+    time-to-max-speed-ms  = <250>;
 };
 
 
@@ -158,6 +174,15 @@ _name_: macro_##_name_ {                   \
 
 
 
+#define MS_UP &mmv MOVE_UP
+#define MS_DN &mmv MOVE_DOWN
+#define MS_LT &mmv MOVE_LEFT
+#define MS_RT &mmv MOVE_RIGHT
+#define WH_UP &msc SCRL_UP
+#define WH_DN &msc SCRL_DOWN
+#define MS_B1 &mkp MB1
+#define MS_B2 &mkp MB2
+
 #define Z_SLEEP  &kp LA(LG(C_PWR))
 #define Z_SSAVE  &kp LC(LA(LS(LG(S))))
 #define NAV_UP   &kp LS(LA(UARW))
@@ -244,14 +269,14 @@ _name_: macro_##_name_ {                   \
         FNC_layer {
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │ COLEMAK  │
-           &sys_reset  ________   ________   ________   &bt_0        &out OUT_BLE ________   ________   ________   &tog CMK
+        //│ RESET    │          │          │          │PROFILE 0 │   │          │ WHEEL UP │ WHEEL DN │          │ COLEMAK  │
+           &sys_reset  ________   ________ &out OUT_BLE &bt_0          ________   WH_UP      WH_DN      ________   &tog CMK
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│
-          &bootloader  ________   ________   ________   &bt_1        &out OUT_USB ________   ________   ________  &bootloader
+        //│BOOTLOADER│          │          │          │PROFILE 1 │   │ MOUSE LT │ MOUSE DN │ MOUSE UP │ MOUSE RT │BOOTLOADER│
+          &bootloader  ________   ________ &out OUT_USB &bt_1          MS_LT      MS_DN      MS_UP      MS_RT     &bootloader
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│ SLEEP    │          │          │CLEAR PROF│PROFILE 2 │   │          │          │          │          │ SSAVE    │
-            Z_SLEEP    ________   ________  &bt BT_CLR  &bt_2         &kp GLOBE  ________   ________   ________    Z_SSAVE
+        //│ SLEEP    │          │          │CLEAR PROF│PROFILE 2 │   │          │MOUSE BTN2│MOUSE BTN1│          │ SSAVE    │
+            Z_SLEEP    ________   ________  &bt BT_CLR  &bt_2          ________   MS_B2      MS_B1      ________   Z_SSAVE
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              ________   ________       ________   ________
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
