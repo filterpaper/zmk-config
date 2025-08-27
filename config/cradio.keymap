@@ -40,11 +40,11 @@
 #define NUM 3
 #define FNC 4
 
-#define TAPPING_TERM  240
-#define QUICK_TAP_MS  140 // TAPPING_TERM - 100
-#define SHIFT_TAP_MS  190 // TAPPING_TERM - 50
-#define COMBO_IDLE_MS 340 // TAPPING_TERM + 100
-#define PRIOR_IDLE_MS 160 // TAPPING_TERM - 80
+#define TAPPING_TERM  225
+#define QUICK_TAP_MS  105
+#define SHIFT_TAP_MS  165
+#define COMBO_IDLE_MS TAPPING_TERM
+#define PRIOR_IDLE_MS QUICK_TAP_MS
 
 &lt {
     flavor          = "hold-preferred";
@@ -147,6 +147,7 @@ combo_##_name_ {                                   \
         COMBO(sg_spc, &kp LS(LG(SPACE)), 12 13)
         // layer toggle
         COMBO(numb,   &tog NUM, 25 26 33)
+        COMBO(func,   &tog FNC, 23 24 30)
     };
 };
 
