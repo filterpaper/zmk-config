@@ -1,7 +1,7 @@
 # GitHub Actions matrix
 ---
 board:
-- nice_nano_v2
+- nice_nano
 shield:
 - cradio_left
 - cradio_right
